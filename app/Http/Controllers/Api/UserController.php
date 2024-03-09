@@ -17,9 +17,11 @@ use App\Models\Favorite;
 use App\Models\OrderNotification;
 use App\Models\SettingOrderStatus;
 use App\Models\Vendor;
+use App\Rules\NotNumbersOnly;
 use App\Rules\PasswordValidate;
 use DB;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rule as ValidationRule;
 use Illuminate\Support\Facades\Config;
 
@@ -44,20 +46,41 @@ class UserController extends Controller
         return $this->success(data: auth()->user()->load('city'));
     }
 
-    public function updateProfile(UpdateUserController $request)
+    public function updateProfile(Request $request )
     {
+        $vendor=auth()->user();  
+        $request->validate([
+            'phone' => [
+            'required',
+            'string', // Change to string, as convertArabicNumbers may return a string
+            'regex:/^((\+|00)966|0)?5[0-9]{8}$/',
+            ]
+        ]);
+        $request->merge([
+            'phone' => convertArabicNumbers($request->phone),
+        ]);
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                new NotNumbersOnly(),
+                Rule::unique('vendors', 'name')->ignore($vendor->id),
+            ],  
+            'phone' => [
+                Rule::unique('vendors')->ignore($vendor->id),
+            ]
+        ]);
+        
+        // Convert Arabic numbers before merging
+        
+
            if ($request->file('imageProfile')){
              $imagename = uploadImage($request->file('imageProfile'), 'Vendors');
              $request['image']=$imagename;
             }
              $requestData = $request->except('imageProfile');
-             $request->validate([
-                'phone' => [
-                    'required',
-                    'string',
-                     ValidationRule::unique('vendors', 'phone'),
-                ]
-                ]);
+           
                 $requestData['phone'] = convertArabicNumbers($requestData['phone']); 
                 auth()->user()->update($requestData);
                 return $this->success(data: auth()->user());

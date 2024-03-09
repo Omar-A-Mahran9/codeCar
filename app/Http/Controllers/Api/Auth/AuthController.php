@@ -40,7 +40,7 @@ class AuthController extends Controller
                      ValidationRule::unique('vendors', 'phone'),
                 ]
                 ]);
-                $data['phone'] = convertArabicNumbers($data['phone']);                ;
+                $data['phone'] = convertArabicNumbers($data['phone']);           
             
             $user = Vendor::create($data);
              $notify=[
@@ -83,10 +83,10 @@ class AuthController extends Controller
         }
 
         $user->sendOTP();
-        OtpLink($user->phone,$user->verification_code??'-');
+        // OtpLink($user->phone,$user->verification_code??'-');
         
         $userWithoutVerificationCode = new User($user->toArray());
-        unset($userWithoutVerificationCode->verification_code);
+        // unset($userWithoutVerificationCode->verification_code);
        
         return $this->success(data: ['token' => $user->createToken("API TOKEN")->plainTextToken, 'vendor' => $userWithoutVerificationCode]);
     }
@@ -108,10 +108,10 @@ class AuthController extends Controller
  
             $token=Null;
             $massage = __('Hello') . ' ' . Auth::guard('vendor')->user()->name . ' ' . __('Please verify Your Phone');
+            $otp=Auth::guard('vendor')->user()->verification_code;
+            // OtpLink(Auth::guard('vendor')->user()->phone,Auth::guard('vendor')->user()->verification_code);
 
-            OtpLink(Auth::guard('vendor')->user()->phone,Auth::guard('vendor')->user()->verification_code);
-
-            return $this->validationFailure(errors:['message'=>$massage,'phone'=>str_replace('966',' ',Auth::guard('vendor')->user()->phone)]);
+            return $this->validationFailure(errors:['message'=>$massage,'phone'=>str_replace('966',' ',Auth::guard('vendor')->user()->phone),'otp'=> $otp]);
         }
         else{
 

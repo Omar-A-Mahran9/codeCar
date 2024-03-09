@@ -259,8 +259,8 @@
                                                                 <!--begin::Thumbnail-->
                                                                 <a href="/dashboard/cars/{{ $order['car_id'] }}"
                                                                     class="symbol symbol-50px">
-                                                                    <span class="symbol-label"
-                                                                        style="background-image:url({{ getImagePathFromDirectory($order->car->main_image, 'Cars') }});"></span>
+                                                                    <img src="{{ getImagePathFromDirectory($order->car->main_image, 'Cars') }}"
+                                                                        alt="Car Image" class="symbol-label">
                                                                 </a>
                                                                 <div class="ms-5">
                                                                     <a href="/dashboard/cars/{{ $order['car_id'] }}"
@@ -317,7 +317,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="fw-boldest" style="font-weight:900">
-                                                            {{ __('Aprrove') . ' ' . $precentage_approve . '% ' . __('from the salary') }}
+                                                            {{ __('Max limit to monthely installment') . ' ' }}
                                                         </td>
                                                         <td class="text-end fw-boldest" colspan="4">
                                                             {{ $approve_amount . ' ' . currency() }}
@@ -397,66 +397,70 @@
                                     <div class="table-responsive">
                                         <!--begin::Table-->
                                         <table class="table align-middle table-row-dashed fs-6 gy-5 mb-0">
-                                            <!--begin::Table head-->
-                                            <thead>
-                                                <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                                    <th class="min-w-175px fw-boldest">{{ __('Car') }}</th>
-                                                    <th class="min-w-70px text-end fw-boldest" colspan="4">
-                                                        {{ __('Quantity') }}</th>
-                                                </tr>
-                                            </thead>
-                                            <!--end::Table head-->
+
                                             <!--begin::Table body-->
                                             <tbody class="fw-bold text-gray-600">
                                                 <!--begin::Cars-->
                                                 @if ($order['orderDetailsCar']['cars'])
-                                                    @foreach (json_decode($order['orderDetailsCar']['cars'], true) as $car)
-                                                        <tr>
-                                                            <td class="text-start fw-boldest">{{ $car['car_name'] }}</td>
-                                                            <td class="text-end fw-boldest" colspan="4">
-                                                                {{ $car['count'] . ' ' . __('car') }}</td>
+                                                    <!--begin::Table head-->
+                                                    <thead>
+                                                        <tr
+                                                            class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                                                            <th class="min-w-175px fw-boldest">{{ __('Car') }}
+                                                            </th>
+                                                            <th class="min-w-70px text-end fw-boldest" colspan="4">
+                                                                {{ __('Quantity') }}</th>
                                                         </tr>
+                                                    </thead>
+                                                    <!--end::Table head-->
+                                                    @foreach (json_decode($order['orderDetailsCar']['cars'], true) as $car)
+                                                        @if (isset($car))
+                                                            <tr class="p-5">
+                                                                <td class="text-start fw-boldest">
+                                                                    {{ $car['car_name'] }}
+                                                                </td>
+                                                                <td class="text-end fw-boldest" colspan="4">
+                                                                    {{ $car['count'] . ' ' . __('car') }}</td>
+                                                            </tr>
+                                                        @endif <!--end::Cars-->
                                                     @endforeach
-                                                @endif
-                                                @if (isset($car))
+                                                @else
                                                     <tr>
-                                                        <td class="text-start fw-boldest">{{ $car['car_name'] }}</td>
-                                                        <td class="text-end fw-boldest" colspan="4">
-                                                            {{ $car['count'] . ' ' . __('car') }}</td>
-                                                    </tr>
-                                                @endif <!--end::Cars-->
-                                                <tr>
-                                                    <td class="text-start fw-boldest" colspan="4">{{ __('Car') }}
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex justify-content-end align-items-center">
-                                                            @if ($order->car)
-                                                                <!--begin::Thumbnail-->
-                                                                <a href="/dashboard/cars/{{ $order['car_id'] }}"
-                                                                    class="symbol symbol-50px">
-                                                                    <span class="symbol-label"
-                                                                        style="background-image:url({{ getImagePathFromDirectory($order->car->main_image, 'Cars') }});"></span>
-                                                                </a>
-                                                                <div class="ms-5">
+                                                        <td class="text-start fw-boldest" colspan="4">
+                                                            {{ __('Car') }}
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex justify-content-end align-items-center">
+                                                                @if ($order->car)
+                                                                    <!--begin::Thumbnail-->
                                                                     <a href="/dashboard/cars/{{ $order['car_id'] }}"
-                                                                        target="_blank"
-                                                                        class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
-                                                                </div>
-                                                            @else
-                                                                <div class="ms-5">
-                                                                    <a href="#"
-                                                                        class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
-                                                                </div>
-                                                            @endif
+                                                                        class="symbol symbol-50px">
+                                                                        <img src="{{ getImagePathFromDirectory($order->car->main_image, 'Cars') }}"
+                                                                            alt="Car Image" class="symbol-label">
+                                                                    </a>
+                                                                    <div class="ms-5">
+                                                                        <a href="/dashboard/cars/{{ $order['car_id'] }}"
+                                                                            target="_blank"
+                                                                            class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
+                                                                    </div>
+                                                                @else
+                                                                    <div class="ms-5">
+                                                                        <a href="#"
+                                                                            class="fw-boldest text-gray-600 text-hover-primary">{{ $order['car_name'] }}</a>
+                                                                    </div>
+                                                                @endif
 
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="fw-boldest">{{ __('Price') }}</td>
-                                                    <td class="text-end fw-boldest" colspan="4">
-                                                        {{ $order['price'] . ' ' . currency() }}</td>
-                                                </tr>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endif
+                                                @if (!$order['orderDetailsCar']['cars'])
+                                                    <tr>
+                                                        <td class="fw-boldest">{{ __('Price') }}</td>
+                                                        <td class="text-end fw-boldest" colspan="4">
+                                                            {{ $order['price'] . ' ' . currency() }}</td>
+                                                    </tr>
+                                                @endif
                                                 <tr>
                                                     <td class="fw-boldest">{{ __('Payment Type') }}</td>
                                                     <td class="text-end fw-boldest" colspan="4">

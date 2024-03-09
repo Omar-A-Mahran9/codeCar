@@ -59,6 +59,8 @@ class Order extends Model
         $this->verification_code = rand(1111, 9999);
         $appName                 = settings()->getSettings("website_name_" . getLocale()) ?? "CodeCar";
         // $this->sendSMS("$appName: $this->verification_code هو رمز الحماية,لا تشارك الرمز");
+        OtpLink($this->phone,$this->verification_code);
+
         $this->save();
     }
 

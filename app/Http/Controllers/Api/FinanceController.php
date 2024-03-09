@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Site\SendOtpRquest;
 use App\Http\Resources\CarResourse;
 use App\Models\Car;
 use App\Models\CarOrder;
@@ -57,7 +58,7 @@ class FinanceController extends Controller
         $data->sendOTP();
         // OtpLink($data->phone,$data->verification_code);
 
-       return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>'-']);
+       return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>$data->verification_code]);
       }
       elseif($request['type']=='individual'){
         $data = $request->validate([
@@ -76,9 +77,9 @@ class FinanceController extends Controller
         //    ]);
         $data= $this->store($request);
         $data->sendOTP();
-        OtpLink($data->phone,$data->verification_code);
+        // OtpLink($data->phone,$data->verification_code);
 
-        return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>'-']);
+        return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>$data->verification_code]);
 
       }
   }
@@ -258,9 +259,9 @@ class FinanceController extends Controller
               'type'=>'order',
              ];
             OrderNotification::create($notify);
-            OtpLink( $order->phone,$order->verification_code);
+            // OtpLink( $order->phone,$order->verification_code);
 
-            return $this->success(data:['Order_Number'=>$order->id]);
+            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
 
             // DB::commit();
             //  $this->sendEmailToAdmin($order);
@@ -301,7 +302,7 @@ class FinanceController extends Controller
         $ordersTableData['name'] = $carOrdersTableData['name'];
         $ordersTableData['status_id']=1;
         $ordersTableData['car_id']=$car->id;
-        $ordersTableData['price']=$car->getPriceAfterVatAttribute();
+        $ordersTableData['price']=$car->getPriceAfterVatAttribute()*$carOrdersTableData['car_count'];
         $ordersTableData['city_id']=$carOrdersTableData['city_id'];;
         $ordersTableData['car_name']=$car->name;
 
@@ -332,9 +333,9 @@ class FinanceController extends Controller
             DB::commit();
             // $this->sendEmailToAdmin($order);
  
-            OtpLink( $order->phone,$order->verification_code);
+            // OtpLink( $order->phone,$order->verification_code);
 
-            return $this->success(data:['Order_Number'=>$order->id,]);
+            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
 
   
         } catch (\Throwable $th) {
@@ -589,9 +590,9 @@ public function financeOrder(Request $request){
 
           ];
           OrderNotification::create($notify);
-          OtpLink( $order->phone,$order->verification_code);
+          // OtpLink( $order->phone,$order->verification_code);
 
-          return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
+          return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
 
            //  $this->sendEmailToAdmin($order);
           } 
@@ -626,7 +627,12 @@ public function financeOrder(Request $request){
           'city_id' => ['bail','required', 'nullable'],
           'bank_id' => ['bail','required', 'nullable', Rule::exists('banks', 'id')],
           ]);
+          $ordersTableData['price']=0;
+
           $cars=$this->getCars($request->input('cars'));
+          foreach ($cars as &$item) {
+            $ordersTableData['price'] += $item['price'] * $item['count'];
+        }
 
       $ordersTableData['type'] = 'car';
       $ordersTableData['phone'] = convertArabicNumbers($carOrdersTableData['phone']);
@@ -669,9 +675,9 @@ public function financeOrder(Request $request){
           DB::rollBack();
           return response()->json(['error' => "something went wrong"], 500);
       }
-      OtpLink( $order->phone,$order->verification_code);
+      // OtpLink( $order->phone,$order->verification_code);
 
-      return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
+      return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
 
     }
     
@@ -702,10 +708,12 @@ public function getCars($request){
     if ($existingCar) {
       return response()->json(['error' => __('car exist before'), 'field_number' => $key], 422);
      }
-    $uniqueCars[] = [ 'car_id'=>$carIdentifier->id, 'car_name'=>$carIdentifier->name_en, 'count'=>$car_count];
+     $uniqueCars[] = [ 'car_id'=>$carIdentifier->id, 'car_name'=>$carIdentifier->name_en, 'count'=>$car_count,'price'=>$carIdentifier->getPriceAfterVatAttribute()];
    }
   else{
-    $uniqueCars[] = ['error' => __('This car not found'), 'field_number' => $key];
+    return $this->validationFailure(errors: ['error'=>[ __('This car not found')],'field_number' => [$key]]);
+
+    // $uniqueCars[] = ['error' => __('This car not found'), 'field_number' => $key];
   }
   }
   return $uniqueCars;
@@ -766,5 +774,13 @@ public function distribute($order_id)
    
     }
 
+
+    public function resendOtp(SendOtpRquest $request)
+    {
+        $phone=convertArabicNumbers($request->phone);
+        $order = Order::where('phone', $phone)->where('id',$request->orderId)->first();
+        $order->sendOTP();
+        return $this->success(data: ['verification_code' => $order->verification_code]);
+    }
 
 }

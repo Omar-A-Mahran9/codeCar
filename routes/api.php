@@ -32,6 +32,7 @@ Route::group(['middleware' => ['json.response']], function () {
     Route::post('/reset-password', 'Api\Auth\ForgetPasswordController@resetPassword');
     Route::post('/verify-otp', 'Api\Auth\VerificationController@verifyOtp');
     Route::get('/act_mod', 'Api\UserController@act_mod');
+    Route::post('/resend-otp-order', [FinanceController::class, 'resendOtp']);
 
      Route::group(['middleware' => 'auth:sanctum'], function () {
         // Route::post('/resend-otp', 'Api\Auth\VerificationController@resendOtp');

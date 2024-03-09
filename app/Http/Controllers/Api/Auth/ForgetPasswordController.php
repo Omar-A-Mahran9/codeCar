@@ -19,7 +19,7 @@ class ForgetPasswordController extends Controller
         $vendor = Vendor::where('phone', $phone)->first();
         if($vendor){
             $vendor->sendOTP();
-            OtpLink(  $vendor->phone, $vendor->verification_code);
+            // OtpLink(  $vendor->phone, $vendor->verification_code);
 
             return $this->success(data: ['verification_code' => '-']);
         }
@@ -40,9 +40,9 @@ class ForgetPasswordController extends Controller
          $phone=convertArabicNumbers($request->phone);
          $vendor = Vendor::where('phone', $phone)->first();
         $vendor->sendOTP();
-        OtpLink(  $vendor->phone, $vendor->verification_code);
+        // OtpLink(  $vendor->phone, $vendor->verification_code);
 
-        return $this->success(data: ['verification_code' => '-']);
+        return $this->success(data: ['verification_code' =>  $vendor->verification_code]);
     }
     public function resetPassword(ResetPasswordRquest $request)
     {

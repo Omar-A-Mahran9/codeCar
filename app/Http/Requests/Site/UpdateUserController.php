@@ -26,8 +26,8 @@ class UpdateUserController extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','string',new NotNumbersOnly],
-            'phone' => ['required','string','unique:users,phone','regex:/^((\+|00)966|0)?5[0-9]{8}$/'],
+            'name' => ['required','string','unique:vendors,phone',new NotNumbersOnly],
+            'phone' => ['required','string','unique:vendors,phone','regex:/^((\+|00)966|0)?5[0-9]{8}$/'],
             'identity_no' => 'required_if:user_type,3,2|nullable|unique:users,id_number|numeric|digits:10',
             'commercial_registration_no' => 'required_if:user_type,3,2|nullable|unique:users,commercial_register_namber',
             'password' => ['nullable','exclude_if:password,null','string','min:8','max:255',new PasswordValidate(),'confirmed'],
