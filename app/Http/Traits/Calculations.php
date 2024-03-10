@@ -99,137 +99,12 @@ trait Calculations{
         "));
  
     }
-    
-
-
-
-    // public function calculateInstallmentscar($request)
-    // {
-    //     $bankOffer=null;
-    //     $AllAvailableOffers=[];
-    //     $car = Car::where('model_id', $request->model)
-    //     ->where('brand_id', request('brand'))
-    //     ->where('year', request('year'))
-    //     ->where('gear_shifter',request('gear_shifter'))
-    //     ->first()??$request->car;
-    //     $bank = Bank::find($request->bank);
- 
-    //    if($car){
-    //     $carDetails = CarResourse::make($car)->resolve();
-    //     $brandId = $carDetails['brand']['id'];
-    //     $sectorBenefit = null;
-    //     $sectorSupport = null;
-    //     $sectorAdvance = null;
-    //     $sectorAdministrative_fees = null;
-    //     $sectorInstallment = null;
-    //     $bankOffer=[];
-    //     $bankOffers = $this->checkBankOffer($request->bank,$request->sector,$carDetails['brand']['id'],$request->first_batch,$request->installment);
-       
-    //     foreach($bankOffers as $bankofferr){
-    //         $bankdata=Bank::find($bankofferr->bank_id);
-    //         if($bank->id==$bankofferr->bank_id){
-    //          array_push($bankOffer,$bankofferr);
-    //         }
-    //         if($bankdata->accept_from_other_banks==1){
-    //             if($bankdata->id!=$bank->id){
-    //                 array_push($bankOffer,$bankofferr);
-    //             }
-              
-    //         }
-    //         }
-    //     // else{
-    //     //  $bankOffer = $this->checkBankOffersec($request->bank,$request->sector,$carDetails['brand']['id'],$request->first_batch,$request->installment);
-    //     //  }
-    //     }
-    //      // $bankOffer = $this->checkBankOffer($request->bank,$request->sector,$brandId);
-    //     if($bankOffer !=null){
-    //         foreach ($bankOffer as $offer) {
-    //          $sectorBenefit = $offer->benefit/100;
-    //          $sectorSupport = $offer->support/100;
-    //         $sectorAdvance = $offer->advance/100;
-    //         $sectorAdministrative_fees = $offer->administrative_fees/100;
-    //         $sectorInstallment = $offer->installment ; //year
-    //         $price =  $car->getPriceAfterVatAttribute();
-            
-    //         if($offer->support >= 100){
-    //             $price = 0;
-    //         }else{
-    //             $price=$price-($price * $sectorSupport);
-    //         }
- 
-    //         $last_installment =($request->last_batch/100)*$price;
-    //         $first_installment =($request->first_batch/100)*$price;
-    //         $installment_years=$request->installment<$sectorInstallment?$sectorInstallment:$request->installment;
-    //         $benefitPercentage = $sectorBenefit ;
-    //         if($request->sex=='female'){
-    //         $insurancePrice = ($price *  (settings()->getSettings('females_insurance') / 100))*$installment_years;
-    //         }
-    //         elseif($request->sex=='male'){
-    //         $insurancePrice = ($price * (settings()->getSettings('males_insurance') / 100))*$installment_years;
-    //         }
-    //         else{
-    //             $insurancePrice = 0;
-    //         }
-    //          $Adminstrativefeecost=($price - $first_installment)* ( $sectorAdministrative_fees);
-    //          $firstBatchIncludeAdministrativeFees = $first_installment + $Adminstrativefeecost;
-    //          $fundingAmount = ($price - $first_installment)+$Adminstrativefeecost;
-    //         if ($benefitPercentage == 0)
-    //         // $fundingAmountIncludeBenefit = ($price - ($first_installment )) - $fundingAmount + $insurancePrice;
-    //             $fundingAmountIncludeBenefit =  $fundingAmount-$last_installment + $insurancePrice;
-    //         else
-    //         // $fundingAmountIncludeBenefit = ($price - ($first_installment)) - $fundingAmount + ($price * $benefitPercentage) + $insurancePrice;
-    //             $fundingAmountIncludeBenefit = ( $fundingAmount *  $benefitPercentage * $installment_years) + $fundingAmount - $last_installment + $insurancePrice;
-    //             $monthlyInstallment = $fundingAmountIncludeBenefit / ($installment_years*12) ;
-    //         // $otherBannks = $this->calculateInstallmentsAllBanks($request)->first();
-    //           $class='w-100';
-    //         $param='';
-    //           $result=[
-    //             // 'lwest_monthly_installment' => $otherBannks['monthlyInstallment'] <$monthlyInstallment ? $otherBannks:null,
-    //             'OfferName'=>BankOffer::find($offer->bank_offer_id)->toArray(),
-    //             'monthly_installment' => round($monthlyInstallment,2),
-    //             'fundingAmount'=>round($fundingAmount,2),
-    //             'firs_installment'=>round($first_installment,2),
-    //             'years' => $installment_years,
-    //             'last_installment'=> round($last_installment,2),
-    //             'sectorAdministrative_fees'=> round($Adminstrativefeecost),
-    //             'bank_offer_id'=>$offer->bank_offer_id,
-    //             'car' => $carDetails,
-    //             // 'bank' =>  $bank
-    //         ];
-
-    //         $AllAvailableOffers[] = $result;
-    //         }
-    //         if($car==null){
-    //             return 'Sorry Car Not Found';
-    
-    //         }
-    //         else{
-    //             return $AllAvailableOffers;
-
-    //         }
-    //      }else{
-    //         return $AllAvailableOffers;
-
-    //         // $sector = $bank->sectors()->find($request->sector_id)->pivot;
-    //         // $sectorBenefit = $sector['benefit'];
-    //         // $sectorSupport = $sector['support'];
-    //         // $sectorAdvance = $sector['advance'];
-    //         // $sectorAdministrative_fees = $sector['administrative_fees'];
-    //         // $sectorInstallment = $sector['installment'];
-            
-    //     }
-
-
-    // }
-
 
     public function calculateInstallmentscar($request)
     {
       // URL  
          $databaseConfig = config('database.connections.mysql');
-         $currentUrl='https://codecar.webstdy.com/';
-           // $currentUrl = url('/');
-     // \URL
+         $currentUrl = url('/');
         $bankOffer=null;
         $AllAvailableOffers=[];
         $car = Car::where('model_id', $request->model)
@@ -291,10 +166,10 @@ trait Calculations{
                 'sectorAdministrative_fees'=>$sectorAdministrative_fees,
                 'calculator_data' => json_encode($request->toArray()),
                 'needed_fun'=>'calculator',
-                'src_ur'=>$currentUrl,
                 'sex'=>$request->sex,
                 'insurance_female'=>settings()->getSettings('females_insurance'),
                 'insurance_man'=>settings()->getSettings('males_insurance'),
+                'src_ur'=>$currentUrl,
                 'Database_connection' => [
                     'servername' => $databaseConfig['host'],
                     'username' => $databaseConfig['username'],
@@ -360,8 +235,6 @@ trait Calculations{
 
     }
 
-
-
     public function calculateByAmount($request)
     {
         $insurance = 0.03;
@@ -401,101 +274,7 @@ trait Calculations{
         ];
     }
 
-    public function calculateInstallmentsAllBanks($request){
-        $car = Car::find($request->car_id);
  
-        $carDetails = CarResourse::make($car)->resolve();
+
  
-        $banks = Bank::whereNotIn('id',[$request->bank_id])->where('accept_from_other_banks',1)->get();
-        $brandId = $carDetails['brand']['id'];
-
-        $monthlyInstallments = [];
-        foreach($banks as $bank){
-            $sectorBenefit = null;
-            $sectorSupport = null;
-            $sectorAdvance = null;
-            $sectorAdministrative_fees = null;
-            $sectorInstallment = null;
-            $bankOffer = $this->checkBankOffer($bank->id,$request->sector_id,$brandId);
-
-            if($bankOffer !=null){
-                $sectorBenefit = $bankOffer->benefit;
-                $sectorSupport = $bankOffer->support;
-                $sectorAdvance = $bankOffer->advance;
-                $sectorAdministrative_fees = $bankOffer->administrative_fees;
-                $sectorInstallment = $bankOffer->installment;
-            }else{
-                $sector = $bank->sectors()->find($request->sector_id)->pivot;
-                $sectorBenefit = $sector['benefit'];
-                $sectorSupport = $sector['support'];
-                $sectorAdvance = $sector['advance'];
-                $sectorAdministrative_fees = $sector['administrative_fees'];
-                $sectorInstallment = $sector['installment'];
-            }
-
-            $supportPercentage = $sectorSupport / 100;
-            $price =  $car->getPriceAfterVatAttribute();
-            if($sectorSupport > 100){
-                $price = ($price * $supportPercentage);
-            }
-            $last_installment = $price * ($request->last_installment/100);
-            $first_installment = $price * ($request->first_installment/100);
-            $benefitPercentage = $sectorBenefit / 100;
-            $insurancePrice = $price * $request->installment * (settings()->getSettings('insurance_percentage') / 100);
-            $firstBatchIncludeAdministrativeFees = $first_installment + ( $price * ( $sectorAdministrative_fees / 100) );
-            $fundingAmount = $price - $firstBatchIncludeAdministrativeFees + ( $price * ( $sectorAdministrative_fees / 100) );
-            if ($benefitPercentage == 0)
-                $fundingAmountIncludeBenefit =  $fundingAmount - $last_installment + $insurancePrice;
-            else
-                $fundingAmountIncludeBenefit = ($fundingAmount * $benefitPercentage * $request->installment) + $fundingAmount - $last_installment + $insurancePrice;
-
-            $monthlyInstallment = $fundingAmountIncludeBenefit / $request->installment / 12;
-            $monthlyInstallments[]=[
-                'bank_id' => $bank->id,
-                'bank' => $bank->name,
-                'monthlyInstallment' => $monthlyInstallment,
-
-            ];
-        }
-
-
-        $monthlyInstallments = collect($monthlyInstallments)->sortBy('monthlyInstallment');
-
-        return $monthlyInstallments;
-    }
-
-
-    public function checkBanksOffer($bankId,$sectorId,$brandId){
-        $today = Carbon::now()->format('Y-m-d');
-        return collect(DB::select("SELECT
-            banks.id as bank_id,
-            bank_offers.id as bank_offer_id,
-            banks.name_".getLocale()." as bank_name,
-            bank_offers.from as period_from,
-            bank_offers.to as period_to,
-            bank_offer_brand.brand_id as brand_id,
-            bank_offer_sector.*
-
-        from banks
-            RIGHT JOIN
-                bank_offers on banks.id = bank_offers.bank_id
-            JOIN
-                bank_offer_brand on bank_offer_brand.bank_offer_id = bank_offers.id
-            JOIN
-                bank_offer_sector on bank_offer_sector.bank_offer_id = bank_offers.id
-
-            WHERE
-                bank_offers.to > '".$today."'
-            AND
-                bank_offers.from <= '".$today."'
-            AND
-                bank_offer_brand.brand_id = ".$brandId."
-            AND
-                banks.id = ".$bankId."
-            AND
-                bank_offer_sector.sector_id = ".$sectorId."
-
-        "));
-    }
-
 }
