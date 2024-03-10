@@ -711,7 +711,7 @@ public function getCars($request){
      $uniqueCars[] = [ 'car_id'=>$carIdentifier->id, 'car_name'=>$carIdentifier->name_en, 'count'=>$car_count,'price'=>$carIdentifier->getPriceAfterVatAttribute()];
    }
   else{
-    return $this->validationFailure(errors: ['error'=>[ __('This car not found')],'field_number' => [$key]]);
+    return $this->validationFailure(errors: ['error'=>__('This car not found'),'field_number' => $key]);
 
     // $uniqueCars[] = ['error' => __('This car not found'), 'field_number' => $key];
   }
