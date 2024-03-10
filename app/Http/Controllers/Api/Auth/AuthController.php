@@ -111,7 +111,7 @@ class AuthController extends Controller
             $otp=Auth::guard('vendor')->user()->verification_code;
             // OtpLink(Auth::guard('vendor')->user()->phone,Auth::guard('vendor')->user()->verification_code);
 
-            return $this->validationFailure(errors:['message'=>$massage,'phone'=>str_replace('966',' ',Auth::guard('vendor')->user()->phone),'otp'=> $otp]);
+            return $this->validationFailure(errors:['message'=>$massage,'phone'=>str_replace('966',' ',Auth::guard('vendor')->user()->phone),'otp'=> '-']);
         }
         else{
 

@@ -16,7 +16,7 @@ class VerificationController extends Controller
         $phone=convertArabicNumbers($request->phone);
          $user = Vendor::where('phone',$phone)->first();
         $user->sendOTP();
-        return $this->success(data: ['verification_code' => $user->verification_code]);
+        return $this->success(data: ['verification_code' => '-']);
     }
 
     public function verifyOtp(Request $request)

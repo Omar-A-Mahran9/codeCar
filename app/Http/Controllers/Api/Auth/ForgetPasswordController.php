@@ -42,7 +42,7 @@ class ForgetPasswordController extends Controller
         $vendor->sendOTP();
         // OtpLink(  $vendor->phone, $vendor->verification_code);
 
-        return $this->success(data: ['verification_code' =>  $vendor->verification_code]);
+        return $this->success(data: ['verification_code' =>  '-']);
     }
     public function resetPassword(ResetPasswordRquest $request)
     {

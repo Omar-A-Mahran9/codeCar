@@ -58,7 +58,7 @@ class FinanceController extends Controller
         $data->sendOTP();
         // OtpLink($data->phone,$data->verification_code);
 
-       return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>$data->verification_code]);
+       return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>'-']);
       }
       elseif($request['type']=='individual'){
         $data = $request->validate([
@@ -79,7 +79,7 @@ class FinanceController extends Controller
         $data->sendOTP();
         // OtpLink($data->phone,$data->verification_code);
 
-        return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>$data->verification_code]);
+        return $this->success(data:['Order_Number'=>$data->id,'verification_code'=>'-']);
 
       }
   }
@@ -261,7 +261,7 @@ class FinanceController extends Controller
             OrderNotification::create($notify);
             // OtpLink( $order->phone,$order->verification_code);
 
-            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
+            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
 
             // DB::commit();
             //  $this->sendEmailToAdmin($order);
@@ -335,7 +335,7 @@ class FinanceController extends Controller
  
             // OtpLink( $order->phone,$order->verification_code);
 
-            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
+            return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
 
   
         } catch (\Throwable $th) {
@@ -592,7 +592,7 @@ public function financeOrder(Request $request){
           OrderNotification::create($notify);
           // OtpLink( $order->phone,$order->verification_code);
 
-          return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
+          return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
 
            //  $this->sendEmailToAdmin($order);
           } 
@@ -677,7 +677,7 @@ public function financeOrder(Request $request){
       }
       // OtpLink( $order->phone,$order->verification_code);
 
-      return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>$order->verification_code]);
+      return $this->success(data:['Order_Number'=>$order->id,'verification_code'=>'-']);
 
     }
     
@@ -780,7 +780,7 @@ public function distribute($order_id)
         $phone=convertArabicNumbers($request->phone);
         $order = Order::where('phone', $phone)->where('id',$request->orderId)->first();
         $order->sendOTP();
-        return $this->success(data: ['verification_code' => $order->verification_code]);
+        return $this->success(data: ['phone' =>$phone]);
     }
 
 }
