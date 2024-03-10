@@ -706,12 +706,13 @@ public function getCars($request){
     if ($carIdentifier) {
     $existingCar = collect($uniqueCars)->firstWhere('car_id', $carIdentifier->id);
     if ($existingCar) {
-      return response()->json(['error' => __('car exist before'), 'field_number' => $key], 422);
-     }
+       return $this->validationFailure(errors: ['errors' => __('car exist before'), 'field_number' => $key]);
+ 
+    }
      $uniqueCars[] = [ 'car_id'=>$carIdentifier->id, 'car_name'=>$carIdentifier->name_en, 'count'=>$car_count,'price'=>$carIdentifier->getPriceAfterVatAttribute()];
    }
   else{
-    return $this->validationFailure(errors: ['error'=>__('This car not found'),'field_number' => $key]);
+    return $this->validationFailure(errors: ['errors'=>__('This car not found'),'field_number' => $key]);
 
     // $uniqueCars[] = ['error' => __('This car not found'), 'field_number' => $key];
   }
