@@ -768,6 +768,7 @@
                 var brandId = $(this).val();
                 // Clear the existing options in the "Model" dropdown
                 $('#model-sp').empty();
+                $('#model-sp').append('<option value="" selected></option>');
 
                 if (brandId) {
                     // Make an AJAX request to fetch models based on the selected brand
@@ -777,8 +778,12 @@
                         success: function(data) {
                             // Populate the "Model" dropdown with the fetched models
                             $.each(data, function(key, value) {
+                                var selectedAttribute = value.id ==
+                                    {{ $car['model_id'] }} ? 'selected' : '';
+
                                 $('#model-sp').append('<option value="' + value.id +
-                                    '">' + value.name + '</option>');
+                                    '" ' + selectedAttribute + '>' +
+                                    value.name + '</option>');
                             });
                         }
                     });
@@ -790,6 +795,7 @@
 
                 // Clear the existing options in the "Category" dropdown
                 $('#category-sp').empty();
+                $('#category-sp').append('<option value="" selected></option>');
 
                 if (modelId) {
                     // Make an AJAX request to fetch categories based on the selected model
@@ -799,8 +805,13 @@
                         success: function(data) {
                             // Populate the "Category" dropdown with the fetched categories
                             $.each(data, function(key, value) {
+                                var selectedAttribute = value.id ==
+                                    {{ $car['category_id'] }} ?
+                                    'selected' : '';
+
                                 $('#category-sp').append('<option value="' + value.id +
-                                    '">' + value.name + '</option>');
+                                    '" ' + selectedAttribute + '>' +
+                                    value.name + '</option>');
                             });
                         }
                     });

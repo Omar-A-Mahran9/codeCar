@@ -47,7 +47,7 @@
 
                 <!-- begin :: Card header -->
                 <div class="card-header d-flex align-items-center">
-                    <h3 class="fw-bolder text-dark">{{ __('Edit category') . ' : ' . $category->name }}</h3>
+                    <h3 class="fw-bolder text-dark">{{ __('Edit Category') . ' : ' . $category->name }}</h3>
                 </div>
                 <!-- end   :: Card header -->
 
@@ -88,8 +88,7 @@
                         </div>
 
                         <div class="col-md-4 fv-row">
-
-                            <label class="fs-5 fw-bold mb-2">{{ __('Category') }}</label>
+                            <label class="fs-5 fw-bold mb-2">{{ __('Model') }}</label>
                             <select class="form-select" data-control="select2" name="car_model_id" id="model-sp"
                                 data-placeholder="{{ __('Choose the category') }}"
                                 data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">

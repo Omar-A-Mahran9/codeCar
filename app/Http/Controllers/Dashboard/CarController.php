@@ -365,6 +365,7 @@ public function show(Car $car){
     public function getCategories($modelId)
     {
         $categories = Category::where('car_model_id', $modelId)->get();
+        
          return response()->json($categories);
     }  
 
