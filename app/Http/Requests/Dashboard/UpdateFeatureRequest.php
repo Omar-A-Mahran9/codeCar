@@ -26,9 +26,9 @@ class UpdateFeatureRequest extends FormRequest
     {
         $feature = request()->route('feature');
         return [
-             'name_ar'    => ['required' , 'string' , 'unique:features', 'max:255' ,new NotNumbersOnly()],
+             'name_ar'    => ['required' , 'string' ,'unique:features,name_ar,' . $feature->id, 'max:255' ,new NotNumbersOnly()],
 
-             'name_en'    => ['required' , 'string' ,'unique:features', 'max:255' ,new NotNumbersOnly()],
+             'name_en'    => ['required' , 'string' ,'unique:features,name_en,' . $feature->id, 'max:255' ,new NotNumbersOnly()],
         ];
     }
 }

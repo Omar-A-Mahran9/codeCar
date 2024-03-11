@@ -42,7 +42,8 @@ class UpdatePackageRequest extends FormRequest
                 'nullable',
                 'numeric',
                 'not_in:0',
-                'gt:annual_price_after_discount',
+                'lt:monthly_price',
+                'lt:annual_price_after_discount',
 
              ],
          
