@@ -28,10 +28,10 @@ class OrderController extends Controller
             $user = Employee::find(Auth::user()->id);
       
                 if ($user->roles->contains('id', 1)) {
-                     $data = getModelData(model : new Order() , relations : [ 'employee' => ['id','name']]  );
+                     $data = getModelData(model : new Order() , andsFilters: [['verified','=',1]],relations : [ 'employee' => ['id','name']]  );
                 } else {
                     // User does not have role 1, return orders where employee_id is the user's ID
-                     $data = getModelData(model : new Order() , andsFilters: [['employee_id', '=', $user->id]], relations : ['employee' => ['id', 'name']]);
+                     $data = getModelData(model : new Order() , andsFilters: [['employee_id', '=', $user->id],['verified','=',1]], relations : ['employee' => ['id', 'name']]);
                   
                 }
                return response()->json($data);

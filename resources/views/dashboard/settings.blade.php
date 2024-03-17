@@ -27,6 +27,7 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body pb-0">
+
             <!--begin::Navs-->
             <div class="d-flex overflow-auto h-55px">
                 <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold flex-nowrap">
@@ -1017,8 +1018,8 @@
                     <div class="col-md-6">
 
                         <label class="form-label">{{ __('Privacy policy in arabic') }}</label>
-                        <textarea rows="2" class="form-control form-control form-control" name="privacy_policy_ar"
-                            data-kt-autosize="true">{!! settings()->getSettings('privacy_policy_ar') ?? '' !!}</textarea>
+                        <textarea id="tinymce_privacy_policy_ar" name="privacy_policy_ar" class="tinymce">{!! settings()->getSettings('privacy_policy_ar') ?? '' !!}</textarea>
+
                         <p class="text-danger invalid-feedback" id="privacy_policy_ar"></p>
 
                     </div>
@@ -1028,8 +1029,10 @@
                     <div class="col-md-6">
 
                         <label class="form-label">{{ __('Privacy policy in english') }}</label>
-                        <textarea rows="2" class="form-control form-control form-control" name="privacy_policy_en"
-                            data-kt-autosize="true">{!! settings()->getSettings('privacy_policy_en') ?? '' !!}</textarea>
+                        <textarea id="tinymce_privacy_policy_en" name="privacy_policy_en" class="tinymce">{!! settings()->getSettings('privacy_policy_en') ?? '' !!}</textarea>
+
+                        <!--<textarea rows="2" class="form-control form-control form-control" name="privacy_policy_en"-->
+                        <!--    data-kt-autosize="true">{!! settings()->getSettings('privacy_policy_en') ?? '' !!}</textarea>-->
                         <p class="text-danger error-element" id="privacy_policy_en"></p>
 
                     </div>
@@ -1037,7 +1040,6 @@
 
                 </div>
                 <!-- End   :: Input group -->
-
                 <!-- Begin :: Input group -->
                 <div class="fv-row row mb-15">
 
@@ -1045,9 +1047,9 @@
                     <div class="col-md-6">
 
                         <label class="form-label">{{ __('Terms and conditions in arabic') }}</label>
-
-                        <textarea rows="2" class="form-control form-control form-control" name="terms_and_conditions_ar"
-                            data-kt-autosize="true">{!! settings()->getSettings('terms_and_conditions_ar') ?? '' !!}</textarea>
+                        <!--<textarea rows="2" class="form-control form-control form-control" name="terms_and_conditions_ar"-->
+                        <!--    data-kt-autosize="true">{!! settings()->getSettings('terms_and_conditions_ar') ?? '' !!}</textarea>-->
+                        <textarea id="tinymce_terms_and_conditions_ar" name="terms_and_conditions_ar" class="tinymce">{!! settings()->getSettings('terms_and_conditions_ar') ?? '' !!}</textarea>
 
 
                         <p class="text-danger invalid-feedback" id="terms_and_conditions_ar"></p>
@@ -1060,8 +1062,10 @@
 
                         <label class="form-label">{{ __('Terms and conditions in english') }}</label>
 
-                        <textarea rows="2" class="form-control form-control form-control" name="terms_and_conditions_en"
-                            data-kt-autosize="true">{!! settings()->getSettings('terms_and_conditions_en') ?? '' !!}</textarea>
+                        <!--<textarea rows="2" class="form-control form-control form-control" name="terms_and_conditions_en"-->
+                        <!--    data-kt-autosize="true">{!! settings()->getSettings('terms_and_conditions_en') ?? '' !!}</textarea>-->
+                        <textarea id="tinymce_terms_and_conditions_en" name="terms_and_conditions_en" class="tinymce">{!! settings()->getSettings('terms_and_conditions_en') ?? '' !!}</textarea>
+
 
 
                         <p class="text-danger invalid-feedback" id="terms_and_conditions_en"></p>
@@ -1452,20 +1456,30 @@
                     <!-- Begin :: Col -->
                     <div class="col-md-6">
 
+                        <label class="form-label">{{ __('About Us text card left side section in arabic') }}</label>
+                        <textarea name="about_us_section_card_left_ar" class="form-control" data-kt-autosize="true">{!! settings()->getSettings('about_us_section_card_left_ar') ?? '' !!}</textarea>
+                        <p class="text-danger invalid-feedback" id="about_us_section_card_left_ar"></p>
+
+                    </div>
+
+                    <div class="col-md-6">
+
                         <label class="form-label">{{ __('About Us text card left side section in english') }}</label>
                         <textarea name="about_us_section_card_left_en" class="form-control" data-kt-autosize="true">{!! settings()->getSettings('about_us_section_card_left_en') ?? '' !!}</textarea>
                         <p class="text-danger invalid-feedback" id="about_us_section_card_left_en"></p>
 
                     </div>
 
-                    <div class="col-md-6">
 
-                        <label class="form-label">{{ __('Why CodeCar section card 3 in arabic') }}</label>
-                        <textarea class="form-control form-control form-control" name="why_code_car_section_card_3_ar"
-                            data-kt-autosize="true">{!! settings()->getSettings('why_code_car_section_card_3_ar') ?? '' !!}</textarea>
-                        <p class="text-danger invalid-feedback" id="why_code_car_section_card_3_ar"></p>
 
-                    </div>
+                    <!--<div class="col-md-6">-->
+
+                    <!--    <label class="form-label">{{ __('Why CodeCar section card 3 in arabic') }}</label>-->
+                    <!--    <textarea class="form-control form-control form-control" name="why_code_car_section_card_3_ar"-->
+                    <!--        data-kt-autosize="true">{!! settings()->getSettings('why_code_car_section_card_3_ar') ?? '' !!}</textarea>-->
+                    <!--    <p class="text-danger invalid-feedback" id="why_code_car_section_card_3_ar"></p>-->
+
+                    <!--</div>-->
 
                     <!-- End   :: Col -->
 
@@ -1668,7 +1682,8 @@
                     <div class="col-md-6">
 
                         <label class="form-label">{{ __('Why CodeCar card 2 in arabic') }}</label>
-                        <textarea class="form-control form-control form-control" name="why_code_car_cars_card_2_ar" data-kt-autosize="true">{!! settings()->getSettings('why_code_car_cars_card_2_ar') ?? '' !!}</textarea>
+                        <textarea class="form-control form-control form-control" name="why_code_car_cars_card_2_ar"
+                            data-kt-autosize="true">{!! settings()->getSettings('why_code_car_cars_card_2_ar') ?? '' !!}</textarea>
                         <p class="text-danger error-element" id="why_code_car_cars_card_2_ar"></p>
 
                     </div>
@@ -1744,32 +1759,32 @@
                 <!-- End   :: Input group -->
 
                 <!-- Begin :: Input group -->
-                <div class="fv-row row mb-15">
+                <!--<div class="fv-row row mb-15">-->
 
-                    <!-- Begin :: Col -->
-                    <div class="col-md-6">
+                <!-- Begin :: Col -->
+                <!--    <div class="col-md-6">-->
 
-                        <label class="form-label">{{ __('Settings section in arabic') }}</label>
-                        <textarea class="form-control " name="setting_ar" data-kt-autosize="true">{!! settings()->getSettings('setting_ar') ?? '' !!}</textarea>
-                        <p class="text-danger error-element" id="setting_ar"></p>
+                <!--        <label class="form-label">{{ __('Settings section in arabic') }}</label>-->
+                <!--        <textarea class="form-control " name="setting_ar" data-kt-autosize="true">{!! settings()->getSettings('setting_ar') ?? '' !!}</textarea>-->
+                <!--        <p class="text-danger error-element" id="setting_ar"></p>-->
 
-                    </div>
-                    <!-- End   :: Col -->
+                <!--    </div>-->
+                <!-- End   :: Col -->
 
-                    <!-- Begin :: Col -->
-                    <div class="col-md-6">
+                <!-- Begin :: Col -->
+                <!--    <div class="col-md-6">-->
 
-                        <label class="form-label">{{ __('Settings section in english') }}</label>
-                        <textarea class="form-control form-control form-control" name="setting_en" data-kt-autosize="true">{!! settings()->getSettings('setting_en') ?? '' !!}</textarea>
-                        <p class="text-danger error-element" id="setting_en"></p>
+                <!--        <label class="form-label">{{ __('Settings section in english') }}</label>-->
+                <!--        <textarea class="form-control form-control form-control" name="setting_en" data-kt-autosize="true">{!! settings()->getSettings('setting_en') ?? '' !!}</textarea>-->
+                <!--        <p class="text-danger error-element" id="setting_en"></p>-->
 
-                    </div>
-                    <!-- End   :: Col -->
+                <!--    </div>-->
+                <!-- End   :: Col -->
 
-                </div>
+                <!--</div>-->
                 <!-- End   :: Input group --
 
-                                                                                                                                                                                                                                             Begin   :: Input group -->
+                                                                                                                                                                                                                                                         Begin   :: Input group -->
                 <div class="fv-row row mb-15">
 
                     <!-- Begin :: Col -->
@@ -1798,15 +1813,6 @@
                 <!-- End   :: Input group -->
                 <div class="fv-row row mb-15">
 
-                    <div>
-                        <div class="col-md-6">
-
-                            <label class="form-label">{{ __('About Us text card left side section in arabic') }}</label>
-                            <textarea name="about_us_section_card_left_ar" class="form-control" data-kt-autosize="true">{!! settings()->getSettings('about_us_section_card_left_ar') ?? '' !!}</textarea>
-                            <p class="text-danger invalid-feedback" id="about_us_section_card_left_ar"></p>
-
-                        </div>
-                    </div>
 
                 </div>
 

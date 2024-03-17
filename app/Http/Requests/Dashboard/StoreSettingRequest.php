@@ -124,8 +124,8 @@ class StoreSettingRequest extends FormRequest
             'why_code_car_cars_card_2_en' => ['required_if:setting_type,about-website', 'nullable', 'string'],
             'why_code_car_cars_card_3_ar' => ['required_if:setting_type,about-website', 'nullable', 'string'],
             'why_code_car_cars_card_3_en' => ['required_if:setting_type,about-website', 'nullable', 'string'],
-            'setting_ar' => ['required_if:setting_type,about-website', 'nullable', 'string'],
-            'setting_en' => ['required_if:setting_type,about-website', 'nullable', 'string'],
+            // 'setting_ar' => ['required_if:setting_type,about-website', 'nullable', 'string'],
+            // 'setting_en' => ['required_if:setting_type,about-website', 'nullable', 'string'],
             'footer_text_ar' => ['required_if:setting_type,about-website', 'nullable', 'string', 'max:255'],
             'footer_text_en' => ['required_if:setting_type,about-website', 'nullable', 'string', 'max:255'],
         ];

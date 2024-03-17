@@ -218,6 +218,8 @@ class SettingController extends Controller
             'Min_year_of_ads'=>settings()->getSettings('Last_year_of_ads'),
             'Min_year_of_finance'=>settings()->getSettings('Last_year_of_finance'),
             'video_url'=>settings()->getSettings('about_us_video'),
+            'main_url' => url('/')."/api"
+
 
         ];
         return $this->success(data:$data);
