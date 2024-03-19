@@ -367,18 +367,22 @@ if(!function_exists('removeFromFavourite')){
  * Author : Khaled
  * created By Khaled @ 15-06-2021
  */
-if(!function_exists('pushNotification')) {
+if(!function_exists('storeAndPushNotification')) {
     function storeAndPushNotification($titleAr, $titleEn, $descriptionAr, $descriptionEn, $icon, $color, $url)
     {
         /* add notification to first Employee */
         $date = Carbon::now()->diffForHumans();
         $notification = new NewNotification($titleAr, $titleEn, $descriptionAr, $descriptionEn, $date, $icon, $color, $url);
-        $admin = Employee::first();
-        $admin->notify($notification);
+        $admins = Employee::whereHas('roles', function ($query) {
+            $query->where('id', 1);
+        })->get();
+        foreach ($admins as $admin) {
+            $admin->notify($notification);
+        }
 
         /* push notifications to all admins */
         $firebaseToken = Employee::whereNotNull('device_token')->pluck('device_token')->all();
-        $SERVER_API_KEY = "AAAAo9l6yTw:APA91bGNwk_P5TA_kKt6_KnDadQHyZUL-rwWTRMIDLB115Z-iYPTP2etHCFlmfHoky8D0RwXJyRGdzfz70xr7AwyWj2qNiGiqwKznK2H8qLDGve0kdxn3aFxRHxCoBVV4OgZz6TGIp5y";
+        $SERVER_API_KEY = "AAAAleTLnGI:APA91bEvD0rfk3ftY1N_ud1IyIts0H_5hfVfub4gXbRK2Z5TAf1xfBD_sKPalRci4S976n8RX330Q__EGKzusHRIHOYqFen4v-o2lOszvf4OTcC4nZm3LM9CjDT3F42dFPtsPNBereFI";
 
         $data = [
             "registration_ids" => $firebaseToken,
@@ -393,7 +397,7 @@ if(!function_exists('pushNotification')) {
                 "icon" => asset('assets/dashboard/media/avatars/dorak.png'),
                 "icon_color" => $color,
                 "url" => $url,
-                "id" => $admin->notifications->last()->id,
+                // "id" => $admin->notifications->last()->id,
             ]
         ];
 

@@ -1,6 +1,5 @@
 <?php
 
-use Webstdy\Notification\NotificationServiceProvider;
 
 return [
 
@@ -182,7 +181,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        NotificationServiceProvider::class
 
     ],
 

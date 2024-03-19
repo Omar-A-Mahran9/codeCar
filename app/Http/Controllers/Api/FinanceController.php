@@ -350,6 +350,7 @@ class FinanceController extends Controller
    
   }
 
+  // create order cash or finance
   public function store($request){
      $car = $this->car->findOrFail($request->id);
      if($request->type=='organization'){
@@ -424,6 +425,8 @@ class FinanceController extends Controller
   }
 
 //FinanceRequest
+
+  // create order funding
 
 public function financeOrder(Request $request){
    // if(auth()->check()){
