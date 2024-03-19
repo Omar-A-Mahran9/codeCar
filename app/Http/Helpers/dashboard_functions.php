@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Webstdy\Notification\NewNotification;
+use App\Notifications\NewNotification;
 
 if ( !function_exists('isRtl') ) {
 

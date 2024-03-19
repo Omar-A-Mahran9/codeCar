@@ -211,7 +211,7 @@
                                     @endif
                                 </h3>
                                 <!--end::Title-->
-                                <a href="{{ route('notifications.mark_all_as_read') }}"
+                                <a href="{{ route('dashboard.notifications.mark_as_read', $notification->id) }}"
                                     class="text-white fw-semibold px-9 mt-10 mb-6">{{ __('Mark all as read') }}</a>
                             </div>
 
@@ -254,7 +254,7 @@
 
                                                 <!--begin::Title-->
                                                 <div class="mb-0 me-2">
-                                                    <a href="{{ route('notifications.mark_as_read', $notification->id) }}"
+                                                    <a href="{{ route('dashboard.notifications.mark_as_read', $notification->id) }}"
                                                         class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->data['title_' . app()->getLocale()] }}</a>
                                                     <div class="text-gray-400 fs-7">
                                                         {{ $notification->data['description_' . app()->getLocale()] }}
@@ -353,7 +353,7 @@
 
                                                 <!--begin::Title-->
                                                 <div class="mb-0 me-2">
-                                                    <a href="{{ route('notifications.mark_as_read', $notification->id) }}"
+                                                    <a href="{{ route('dashboard.notifications.mark_as_read', $notification->id) }}"
                                                         class="fs-6 text-gray-800 text-hover-primary fw-bold">{{ $notification->data['title_' . app()->getLocale()] }}</a>
                                                     <div class="text-gray-400 fs-7">
                                                         {{ $notification->data['description_' . app()->getLocale()] }}
