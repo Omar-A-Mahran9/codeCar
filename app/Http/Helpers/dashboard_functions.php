@@ -407,13 +407,14 @@ if(!function_exists('pushNotification')) {
 
         function OtpLink($phone,$otp)
         { 
-            return 'omar';
         $apiUrl = "https://api.oursms.com/api-a/msgs";
         $token = "e4vHwxheBK6uujxk7G9I";
         $src = 'CODE CAR';
         $dests = "$phone";
+        $appName = settings()->getSettings("website_name_" . getLocale()) ?? "CodeCar";
+
         $body = <<<msg
-                مرحبًا بك في كود كار! رمز التسجيل: $otp
+                مرحبًا بك في $appName ! رمز التسجيل: $otp
                 شكرًا لك!
              msg;
                 
@@ -428,7 +429,7 @@ if(!function_exists('pushNotification')) {
 
         if ($response->successful()) {
             // Request successful
-            echo "SMS sent successfully.";
+            // echo "SMS sent successfully.";
         } else {
             // Request failed
             echo "Failed to send SMS. Error: " . $response->body();

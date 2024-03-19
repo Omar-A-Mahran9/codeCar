@@ -151,14 +151,24 @@
                         <h2 style="font-weight:bold; ">{{ __('Customer Details') }}</h2>
 
                     </div>
-                    <div class="ps-4">
-                        <a href="https://wa.me/{{ $order['phone'] }}?text={{ urlencode(__('welcome')) }}" target="_blank"
-                            title="Chat on WhatsApp" class="whatsapp-icon">
-                            <img src="{{ asset('dashboard-assets/media/svg/social-logos/whatsapp.svg') }}"
-                                alt="WhatsApp Logo"
-                                style="width:50px; height: 50px; margin-left: 23px; margin-right: 23px;">
-                        </a>
-                    </div>
+                    @if ($order['orderDetailsCar']['type'] == 'individual')
+                        <div class="ps-4">
+                            <a href="https://wa.me/{{ $order['phone'] }}?text={{ urlencode(__('السلام عليكم. موقع كود كار للسيارات يرحب بكم ويسعدنا التواصل معك بخصوص طلبك رقم ' . $order['id'] . ' لسيارة: ' . $order['car_name'] . '')) }}"
+                                target="_blank" title="Chat on WhatsApp" class="whatsapp-icon">
+                                <img src="{{ asset('dashboard-assets/media/svg/social-logos/whatsapp.svg') }}"
+                                    alt="WhatsApp Logo"
+                                    style="width:50px; height: 50px; margin-left: 23px; margin-right: 23px;">
+                            </a>
+                        </div>
+                    @else
+                        @foreach (json_decode($order['orderDetailsCar']['cars'], true) as $car)
+                            @if (isset($car))
+                            @endif <!--end::Cars-->
+                        @endforeach
+                    @endif
+
+
+
 
                 </div>
                 <!--end::Card header-->

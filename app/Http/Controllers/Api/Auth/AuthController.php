@@ -108,7 +108,10 @@ class AuthController extends Controller
  
             $token=Null;
             $massage = __('Hello') . ' ' . Auth::guard('vendor')->user()->name . ' ' . __('Please verify Your Phone');
-            $otp=Auth::guard('vendor')->user()->verification_code;
+            $otp=Auth::guard('vendor')->user()->id;
+            $user=Vendor::find($otp);
+            $user->sendOTP();
+
             // OtpLink(Auth::guard('vendor')->user()->phone,Auth::guard('vendor')->user()->verification_code);
 
             return $this->validationFailure(errors:['message'=>$massage,'phone'=>str_replace('966',' ',Auth::guard('vendor')->user()->phone),'otp'=> '-']);
