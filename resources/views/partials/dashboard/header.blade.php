@@ -211,7 +211,7 @@
                                     @endif
                                 </h3>
                                 <!--end::Title-->
-                                <a href="{{ route('dashboard.notifications.mark_as_read', $notification->id) }}"
+                                <a href="{{ route('dashboard.notifications.mark_all_as_read') }}"
                                     class="text-white fw-semibold px-9 mt-10 mb-6">{{ __('Mark all as read') }}</a>
                             </div>
 

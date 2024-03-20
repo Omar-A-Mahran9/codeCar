@@ -21,9 +21,7 @@ class ContactController extends Controller
         ]);
         $data    = $request->toArray();
         $contact = ContactUs::create($data);
-        // dd($contact);
-        $this->newContactUsNotification();
+        $this->newContactUsNotification($contact);
         return $this->success(data: $data);
-
     }
 }

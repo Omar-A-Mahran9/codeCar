@@ -9,8 +9,7 @@ trait NotificationTrait
 {
     protected function newNotification($notification)
     {
-        if ($notification)
-        {
+        if ($notification) {
             $titleAr   = "اشعار جديد";
             $titleEn   = "New Notification";
             $messageAr = "تم ارسال اشعار جديد بتاريخ " . $notification->date->format('Y-m-d') . " الساعة " . $notification->time->translatedFormat('h:i A') . " اضغط لعرض التفاصيل";
@@ -23,7 +22,7 @@ trait NotificationTrait
             storeAndPushNotification($titleAr, $titleEn, $messageAr, $messageEn, $icon, $color, route('dashboard.appointments.show', $notification));
         }
     }
-    protected static function newContactUsNotification()
+    protected static function newContactUsNotification($contact)
     {
         $titleAr   = "رسالة جديدة من صفحة تواصل معنا";
         $titleEn   = "New message from the Contact Us page";
@@ -34,7 +33,6 @@ trait NotificationTrait
             <path id="Path_19091" data-name="Path 19091" d="M20.975,17.261c-.693-.913-2.056-1.449-2.056-5.538,0-4.2-1.854-5.885-3.581-6.289-.162-.04-.279-.094-.279-.265v-.13A1.1,1.1,0,0,0,13.98,3.93h-.027a1.1,1.1,0,0,0-1.08,1.107v.13c0,.166-.117.225-.279.265-1.732.409-3.581,2.092-3.581,6.289,0,4.089-1.363,4.62-2.056,5.538a.893.893,0,0,0,.715,1.431h12.6A.894.894,0,0,0,20.975,17.261Zm-1.755.261H8.729a.2.2,0,0,1-.148-.328,5.45,5.45,0,0,0,.945-1.5,10.2,10.2,0,0,0,.643-3.968,6.9,6.9,0,0,1,.94-3.905A2.887,2.887,0,0,1,12.85,6.576a1.577,1.577,0,0,0,.837-.472.356.356,0,0,1,.535-.009,1.63,1.63,0,0,0,.846.481,2.887,2.887,0,0,1,1.741,1.242,6.9,6.9,0,0,1,.94,3.905,10.2,10.2,0,0,0,.643,3.968,5.512,5.512,0,0,0,.967,1.525A.186.186,0,0,1,19.221,17.522Z" transform="translate(-6.775 -3.93)" fill="#339696"/>
           </svg>';
         $color     = "primary";
-        storeAndPushNotification($titleAr, $titleEn, $messageAr, $messageEn, $icon, $color, route('dashboard.contact-us.index'));
-
+        storeAndPushNotification($titleAr, $titleEn, $messageAr, $messageEn, $icon, $color, route('dashboard.contact-us.edit', $contact->id));
     }
 }
