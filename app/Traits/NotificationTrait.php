@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Order;
 use App\Models\Doctor;
 use App\Models\Appointment;
 
@@ -48,5 +49,19 @@ trait NotificationTrait
           </svg>';
         $color     = "primary";
         storeAndPushNotification($titleAr, $titleEn, $messageAr, $messageEn, $icon, $color, route('dashboard.cars.edit', $car->id));
+    }
+    protected static function newOrderApiNotification($order)
+    {
+        $titleAr   = "طلب شراء سيارة جديد";
+        $titleEn   = "Order to purchase a new car";
+        $messageAr = "تم تقديم طلب شراء سيارة جديد. يرجى التحقق والمتابعة.";
+        $messageEn = "An order to purchase a new car has been submitted. Please check and follow.";
+        $icon      = '<svg id="Icon_ionic-ios-notifications-outline" data-name="Icon ionic-ios-notifications-outline" xmlns="http://www.w3.org/2000/svg" width="14.381" height="18" viewBox="0 0 14.381 18">
+            <path id="Path_19090" data-name="Path 19090" d="M18.328,28.336a.583.583,0,0,0-.571.459,1.127,1.127,0,0,1-.225.49.85.85,0,0,1-.724.265.864.864,0,0,1-.724-.265,1.127,1.127,0,0,1-.225-.49.583.583,0,0,0-.571-.459h0a.587.587,0,0,0-.571.715,2.01,2.01,0,0,0,2.092,1.669A2.006,2.006,0,0,0,18.9,29.051a.589.589,0,0,0-.571-.715Z" transform="translate(-9.63 -12.72)" fill="#339696"/>
+            <path id="Path_19091" data-name="Path 19091" d="M20.975,17.261c-.693-.913-2.056-1.449-2.056-5.538,0-4.2-1.854-5.885-3.581-6.289-.162-.04-.279-.094-.279-.265v-.13A1.1,1.1,0,0,0,13.98,3.93h-.027a1.1,1.1,0,0,0-1.08,1.107v.13c0,.166-.117.225-.279.265-1.732.409-3.581,2.092-3.581,6.289,0,4.089-1.363,4.62-2.056,5.538a.893.893,0,0,0,.715,1.431h12.6A.894.894,0,0,0,20.975,17.261Zm-1.755.261H8.729a.2.2,0,0,1-.148-.328,5.45,5.45,0,0,0,.945-1.5,10.2,10.2,0,0,0,.643-3.968,6.9,6.9,0,0,1,.94-3.905A2.887,2.887,0,0,1,12.85,6.576a1.577,1.577,0,0,0,.837-.472.356.356,0,0,1,.535-.009,1.63,1.63,0,0,0,.846.481,2.887,2.887,0,0,1,1.741,1.242,6.9,6.9,0,0,1,.94,3.905,10.2,10.2,0,0,0,.643,3.968,5.512,5.512,0,0,0,.967,1.525A.186.186,0,0,1,19.221,17.522Z" transform="translate(-6.775 -3.93)" fill="#339696"/>
+          </svg>';
+        $color     = "primary";
+        $order     = Order::find($order->id);
+        storeAndPushNotificationBasedEmployee($order, $titleAr, $titleEn, $messageAr, $messageEn, $icon, $color, route('dashboard.orders.show', $order->id));
     }
 }

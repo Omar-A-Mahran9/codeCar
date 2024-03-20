@@ -376,9 +376,88 @@ if(!function_exists('storeAndPushNotification')) {
         $admins = Employee::whereHas('roles', function ($query) {
             $query->where('id', 1);
         })->get();
+       
         foreach ($admins as $admin) {
             $admin->notify($notification);
         }
+
+        /* push notifications to all admins */
+        $firebaseToken = Employee::whereNotNull('device_token')->pluck('device_token')->all();
+        $SERVER_API_KEY = "AAAAleTLnGI:APA91bEvD0rfk3ftY1N_ud1IyIts0H_5hfVfub4gXbRK2Z5TAf1xfBD_sKPalRci4S976n8RX330Q__EGKzusHRIHOYqFen4v-o2lOszvf4OTcC4nZm3LM9CjDT3F42dFPtsPNBereFI";
+
+        $data = [
+            "registration_ids" => $firebaseToken,
+            "notification" => [
+                "alert_title" => app()->isLocale('ar') ? $titleAr : $titleEn,
+                "title_ar" => $titleAr,
+                "title_en" => $titleEn,
+                "description_ar" => $descriptionAr,
+                "description_en" => $descriptionEn,
+                "date" => $date,
+                "alert_icon" => $icon,
+                "icon" => asset('assets/dashboard/media/avatars/dorak.png'),
+                "icon_color" => $color,
+                "url" => $url,
+                // "id" => $admin->notifications->last()->id,
+            ]
+        ];
+
+        return Http::withHeaders([
+            "Authorization" => "key=$SERVER_API_KEY",
+        ])->post('https://fcm.googleapis.com/fcm/send', $data);
+    }
+
+
+    if(!function_exists('OtpLink')){
+
+        function OtpLink($phone,$otp)
+        { 
+        $apiUrl = "https://api.oursms.com/api-a/msgs";
+        $token = "e4vHwxheBK6uujxk7G9I";
+        $src = 'CODE CAR';
+        $dests = "$phone";
+        $appName = settings()->getSettings("website_name_" . getLocale()) ?? "CodeCar";
+
+        $body = <<<msg
+                مرحبًا بك في $appName ! رمز التسجيل: $otp
+                شكرًا لك!
+             msg;
+                
+        $response = \Illuminate\Support\Facades\Http::asForm()->post($apiUrl, [
+            'token' => $token,
+            'src' => $src,
+            'dests' => $dests,
+            'body' => $body,
+        ]);
+
+        
+
+        if ($response->successful()) {
+            // Request successful
+            // echo "SMS sent successfully.";
+        } else {
+            // Request failed
+            echo "Failed to send SMS. Error: " . $response->body();
+        }
+        }
+    
+    }
+    
+}
+
+/**
+ * push firebase notification .
+ * Author : Khaled
+ * created By Khaled @ 15-06-2021
+ */
+if(!function_exists('storeAndPushNotificationBasedEmployee')) {
+    function storeAndPushNotificationBasedEmployee($employeeId,$titleAr, $titleEn, $descriptionAr, $descriptionEn, $icon, $color, $url)
+    {
+        /* add notification to first Employee */
+        $date = Carbon::now()->diffForHumans();
+        $notification = new NewNotification($titleAr, $titleEn, $descriptionAr, $descriptionEn, $date, $icon, $color, $url);
+        $admin = Employee::find($employeeId->employee_id);
+        $admin->notify($notification);
 
         /* push notifications to all admins */
         $firebaseToken = Employee::whereNotNull('device_token')->pluck('device_token')->all();
