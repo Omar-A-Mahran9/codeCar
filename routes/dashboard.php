@@ -72,7 +72,7 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'as' => 'dash
     Route::get('notifications/{id}/mark_as_read', 'NotificationController@markAsRead')->name('notifications.mark_as_read');
     Route::get('notifications/{type}/load-more/{next}', 'NotificationController@loadMore')->name('notifications.load_more');
     Route::get('notifications/mark-all-as-read', 'NotificationController@markAllAsRead')->name('notifications.mark_all_as_read');
-    Route::post('notifications/change-status-sound' , 'NotificationController@changeSoundStatus')->name('notifications.change-sound-status');
+    Route::post('notifications/change-status-sound', 'NotificationController@changeSoundStatus')->name('notifications.change-sound-status');
 
     /** ajax routes **/
     Route::get('role/{role}/employees', 'RoleController@employees');
