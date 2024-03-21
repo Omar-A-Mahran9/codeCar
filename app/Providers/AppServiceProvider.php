@@ -30,21 +30,21 @@ class AppServiceProvider extends ServiceProvider
     {
         // $this->app['request']->server->set('HTTPS', true);
 
-        if(request()->segment(2) != 'dashboard' && Schema::hasTable('brands'))
+        if (request()->segment(2) != 'dashboard' && Schema::hasTable('brands'))
         {
-            $brands  = Brand::select('id','image','name_en','name_ar', 'car_available_types' )->whereNotNull('car_available_types')->get();
+            $brands = Brand::select('id', 'image', 'name_en', 'name_ar', 'car_available_types')->whereNotNull('car_available_types')->get();
             view()->share(['brands' => $brands]);
         }
 
         View::composer('partials.dashboard.header', function ($view) {
-            $unreadNotifications = Employee::first()->unreadNotifications();
-            $allNotifications = Employee::first()->notifications();
+            $unreadNotifications = auth()->user()->unreadNotifications();
+            $allNotifications    = auth()->user()->notifications();
 
             $view->with(['unreadNotifications' => $unreadNotifications, "allNotifications" => $allNotifications]);
         });
 
         View::composer('partials.dashboard.aside', function ($view) {
-            $unreadNotifications = Employee::first()->unreadNotifications()->take(5)->get();
+            $unreadNotifications = auth()->user()->unreadNotifications()->take(5)->get();
 
             $view->with(['unreadNotifications' => $unreadNotifications]);
         });
