@@ -218,11 +218,11 @@
 
 
                                     <!-- end   :
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    : Column -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                : Column -->
                                     <div class="col-md-4 fv-row">
 
                                         <label class="fs-5 fw-bold mb-2">{{ __('Tax discount') }}
-                                            {{ settings()->getSettings('tax') }}
+                                            {{ settings()->getSettings('maintenance_mode') == 1 ? settings()->getSettings('tax') : 0 }}
                                             %</label>
                                         <div class="form-floating">
                                             <input type="text" class="form-control form-control-solid"

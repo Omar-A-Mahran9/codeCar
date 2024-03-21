@@ -86,7 +86,8 @@
                     <tr>
                         <td style="text-align: {{ app()->isLocale('ar') ? 'right' : 'left' }}">2</td>
                         <td style="text-align: {{ app()->isLocale('ar') ? 'right' : 'left' }}">
-                            {{ __('tax discount') . ' ' . '(' . settings()->getSettings('tax') . '%)' }} </td>
+                            {{ __('tax discount') . ' ' . '(' . settings()->getSettings('maintenance_mode') == 1 ? settings()->getSettings('tax') : 0 . '%)' }}
+                        </td>
                         <td style="text-align: {{ app()->isLocale('ar') ? 'right' : 'left' }}">
                             {{ $financeApproval->tax_discount . ' ' . __('SAR') }}</td>
                     </tr>

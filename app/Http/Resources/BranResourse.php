@@ -28,7 +28,9 @@ class BranResourse extends JsonResource
                         ];
                     })->toArray()
                 ];
-            })->toArray()
-        ];
+            })->toArray(),
+            'cars_count' => $this->cars->count(), // Directly count the related cars
+
+         ];
     }
 }

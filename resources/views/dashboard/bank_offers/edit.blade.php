@@ -200,7 +200,7 @@
                             <div class="col-md-3 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('Enter the benefit') }}%</label>
                                 <div class="form-floating">
-                                    <input style="direction: {{ isArabic() ? 'rtl' : '' }}" type="text"
+                                    <input style="direction: {{ isArabic() ? 'rtl' : '' }}" type="number"
                                         class="form-control" id="{{ $bankSector->slug }}_benefit_inp"
                                         name="{{ $bankSector->slug }}[benefit]"
                                         value="{{ $bankSector['pivot']['benefit'] }}" placeholder="example" />
@@ -261,7 +261,7 @@
                             <div class="col-md-2 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('Support') }} %</label>
                                 <div class="form-floating">
-                                    <input style="direction: ltr" type="input" class="form-control"
+                                    <input style="direction: ltr" type="number" class="form-control"
                                         id="{{ $bankSector->slug }}_support_inp" name="{{ $bankSector->slug }}[support]"
                                         value="{{ $bankSector['pivot']['support'] }}" placeholder="example" />
                                     <label for="support_inp">{{ __('Enter the support') }}</label>
@@ -273,7 +273,7 @@
                             <div class="col-md-2 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('administrative fees') }} %</label>
                                 <div class="form-floating">
-                                    <input style="direction: ltr" type="input" class="form-control"
+                                    <input style="direction: ltr" type="number" class="form-control"
                                         id="{{ $bankSector->slug }}_administrative_fees"
                                         value="{{ $bankSector['pivot']['administrative_fees'] }}"
                                         name="{{ $bankSector->slug }}[administrative_fees]" placeholder="example" />
@@ -286,7 +286,7 @@
                             <div class="col-md-3 fv-row">
                                 <label class="fs-5 fw-bold mb-2">{{ __('Enter the advance') }} %</label>
                                 <div class="form-floating">
-                                    <input style="direction: ltr" type="input" class="form-control"
+                                    <input style="direction: ltr" type="number" class="form-control"
                                         id="{{ $bankSector->slug }}_advance"
                                         value="{{ $bankSector['pivot']['advance'] }}"
                                         name="{{ $bankSector->slug }}[advance]" placeholder="example" />

@@ -64,7 +64,6 @@ class CarController extends Controller
     public function carmodel(){
         $model=CarModel::get();
         $data=ModelResourse::collection( $model );
-
         return $this->success(data: $data);
     }
 
@@ -131,6 +130,62 @@ class CarController extends Controller
           $years = Car::distinct()->pluck('year')->sortBy(function ($year) {
             return (int) $year;
         })->values()->toArray();     
+
+////////
+        $car=Car::get();
+        $currentYear = now()->year;
+        $yearsRange = range(2010, $currentYear);
+        $carCountsPerYear = [];
+
+        foreach ($yearsRange as $year) {
+            $count = Car::where('year', $year)->count();
+            $carCountsPerYear[] = [
+                'year' => $year,
+                'count' => $count,
+            ];
+        }
+         $usedCount = $car->where('is_new', '0')->count();
+        $newCount = $car->where('is_new', '1')->count();
+        $automatic_gear = $car->where('gear_shifter', 'automatic')->count();
+        $manual_gear = $car->where('gear_shifter', 'manual')->count();
+        $gasoline_type = $car->where('fuel_type', 'gasoline')->count();
+        $diesel_type = $car->where('fuel_type', 'diesel')->count();
+        $electric_type = $car->where('fuel_type', 'electric')->count();
+        $hybrid_type = $car->where('fuel_type', 'hybrid')->count();
+
+        $hatchback_shape = $car->where('car_body', 'hatchback')->count();
+        $sedan_shape = $car->where('car_body', 'sedan')->count();
+        $four_wheel_drive_shape = $car->where('car_body', 'four-wheel-drive')->count();
+        $commercial_shape = $car->where('car_body', 'commercial')->count();
+        $family_shape = $car->where('car_body', 'family')->count();
+
+        $ranges = [
+            0 => [800, 1200],
+            1 => [1300, 1400],
+            2 => [1500, 1600],
+            3 => [1800, 2000],
+            4 => [2200, 3000],
+            5 => 'greater_than_3000', // Special case for > 3000
+        ];
+        
+        $fuel_tank_capacity_results = [];
+        
+        foreach ($ranges as $index => $range) {
+            // For each range, we'll count the cars that fit the criteria
+            if ($range === 'greater_than_3000') {
+                $count = Car::where('fuel_tank_capacity', '>', 3000)->count();
+                $title = 'More than 3000';
+            } else {
+                $count = Car::whereBetween('fuel_tank_capacity', $range)->count();
+                $title = "{$range[0]} - {$range[1]}";
+            }
+        
+            $fuel_tank_capacity_results[] = [
+                'title' => $title,
+                'car_count' => $count,
+            ];
+        }
+ 
         $data = [
             'brands' => $BrandData,
             'allbrands'=>$BrandsData,
@@ -170,6 +225,26 @@ class CarController extends Controller
             'OrganizationType'=> $type,
             'OrganizationActive'=>$Active,
             'nationalities'=> $nationalitydata,
+            'car_counts'=>[
+                'used' => $usedCount,
+                'new' => $newCount,
+                'automatic'=>$automatic_gear,
+                'manual'=>$manual_gear,
+                'gasoline_type'=>$gasoline_type,
+                'diesel_type'=>$diesel_type,
+                'electric_type'=>$electric_type,
+                'hybrid_type'=>$hybrid_type,
+                'hatchback_shape'=>$hatchback_shape,
+                'sedan_shape'=>$sedan_shape,
+                'four_wheel_drive_shape'=>$four_wheel_drive_shape,
+                'commercial_shape'=>$commercial_shape,
+                'family_shape'=>$family_shape,
+                'years'=> $carCountsPerYear,
+                'fuel_capacity'=>$fuel_tank_capacity_results,
+
+
+
+            ]
 
            
         ];

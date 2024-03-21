@@ -23,7 +23,9 @@ class ModelResourse extends JsonResource
                     'id'=>$categorie->id,
                     'name'=>$categorie->name,
                 ];
-            })->toArray()
+            })->toArray(),
+            'cars_count' => $this->cars->count(), // Directly count the related cars
+
         ];
     }
 }

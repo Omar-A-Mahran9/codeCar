@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $fillable = ['id','name', 'phone','employee_id','price','nationality_id','identity_no', 'car_name', 'car_id', 'city_id', 'type', 'identity_Card', 'License_Card','Hr_Letter_Image','Insurance_Image','status_id', 'client_id','opened_at','opened_by'];
+    protected $fillable = ['id','name', 'phone','employee_id','price','nationality_id','identity_no', 'car_name', 'car_id', 'city_id', 'type', 'identity_Card', 'License_Card','Hr_Letter_Image','Insurance_Image','status_id', 'client_id','opened_at','opened_by','birth_date'];
     protected $casts   = [
         'created_at' => 'date:Y-m-d',
         'updated_at' => 'date:Y-m-d'

@@ -17,6 +17,8 @@ class ColorResourse extends JsonResource
         return [
             'id' => $this->id,
             'title'=> $this->name,
+            'cars_count' => $this->cars->count(), // Directly count the related cars
+
         ];
     }
 }

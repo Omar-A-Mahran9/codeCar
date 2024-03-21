@@ -87,15 +87,15 @@ class BankOfferController extends Controller
                 bank_offers.to > '".$request->from."';
         "));
 
-        if(count($checkBrands) > 0){
-            $checkBrands = $checkBrands->pluck('brand_name')->toArray();
+        // if(count($checkBrands) > 0){
+        //     $checkBrands = $checkBrands->pluck('brand_name')->toArray();
             
-            return response()->json([
-                'errors' => [
-                    'brand_id' => ['( '.implode(",",$checkBrands).' ) '.__('These brands have been used before and cannot be used before the expiry date assigned to them  in other offers')]
-                ]
-            ],422);
-        }
+        //     return response()->json([
+        //         'errors' => [
+        //             'brand_id' => ['( '.implode(",",$checkBrands).' ) '.__('These brands have been used before and cannot be used before the expiry date assigned to them  in other offers')]
+        //         ]
+        //     ],422);
+        // }
         
         $data['image'] = uploadImage( $request->file('image') ,"BankOffers");
         
@@ -177,15 +177,15 @@ class BankOfferController extends Controller
             and 
             bank_offers.id <> ".$bankOffer->id.";
         "));
-        if(count($checkBrands) > 0){
-            $checkBrands = $checkBrands->pluck('brand_name')->toArray();
+        // if(count($checkBrands) > 0){
+        //     $checkBrands = $checkBrands->pluck('brand_name')->toArray();
             
-            return response()->json([
-                'errors' => [
-                    'brand_id' => ['( '.implode(",",$checkBrands).' ) '.__('These brands have been used before and cannot be used before the expiry date assigned to them  in other offers')]
-                ]
-            ],422);
-        }
+        //     return response()->json([
+        //         'errors' => [
+        //             'brand_id' => ['( '.implode(",",$checkBrands).' ) '.__('These brands have been used before and cannot be used before the expiry date assigned to them  in other offers')]
+        //         ]
+        //     ],422);
+        // }
         
         $bankOfferUpdatedData = [
             'title_ar' =>  $data['title_ar'],
