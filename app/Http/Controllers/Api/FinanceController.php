@@ -546,11 +546,6 @@ class FinanceController extends Controller
          return $this->success(data: $data);
         break;
 
-            $data = $this->calculateInstallmentscar($request);
-          }
-          return $this->success(data: $data);
-          break;
-
         case 4:
           $request->validate([
             'bank_offer_id' => 'required|exists:bank_offers,id',

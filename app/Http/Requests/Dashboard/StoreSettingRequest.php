@@ -33,7 +33,7 @@ class StoreSettingRequest extends FormRequest
             'facebook_url' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255'],
             'whatsapp_url' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255'],
             'about_us_video' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255',new youtubevalidation(),],
-            'working_time' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255'],
+            'working_time' => ['required_if:setting_type,general', 'nullable', 'string', 'max:255'],
 
             'twitter_url' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255'],
             'instagram_url' => ['required_if:setting_type,general', 'url', 'nullable', 'string', 'max:255'],

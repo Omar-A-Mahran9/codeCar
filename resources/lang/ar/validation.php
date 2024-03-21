@@ -315,6 +315,7 @@ return [
         'youtube_url' => 'رابط قناة اليوتيوب',
         'snapchat_url' => 'رابط سناب شات',
         'logo' => 'اللوجو',
+        'working_time'=>'مواعيد العمل ',
         'favicon' => 'ايقونة الموقع',
         'setting_type' => 'نوع الاعدادات',
         'meta_tag_description_ar' => 'وصف مختصر بالعربية',
