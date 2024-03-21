@@ -20,7 +20,7 @@ class OrderController extends Controller
    
     public function index(Request $request)
     {
-        $this->authorize('view_orders');
+         $this->authorize('view_orders');
 
         if ($request->ajax())
         {

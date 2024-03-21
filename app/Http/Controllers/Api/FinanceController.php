@@ -14,9 +14,11 @@ use App\Http\Traits\Calculations;
 use App\Models\Bank;
 use App\Models\Employee;
 use App\Models\OrderNotification;
+use App\Rules\NotNumbersOnly;
 use Illuminate\Validation\Rule;
 
 use Auth;
+use Carbon\Carbon;
 use DB;
 
 class FinanceController extends Controller
@@ -101,6 +103,7 @@ class FinanceController extends Controller
                       return [
                         "brand" => $carResource['brand']['title'],
                         "model" => $carResource['model']['title'],
+                        "category" => $carResource['categories']['title']??null,
                         "year" => $carResource['year'],
                         "gear_shifter"=>$carResource['gear_shifter'],
                         "color_id"=>$carResource['color']['title'],
@@ -115,7 +118,7 @@ class FinanceController extends Controller
             'email' => ['bail', 'required', 'email:rfc,dns', 'max:255'],
             'phone' => ['bail', 'required', 'regex:/^((\+|00)966|0)?5[0-9]{8}$/'],
             "sex" => "required",
-            "birth_date" => "required",
+            'birth_date' => 'required|date|before_or_equal:' . Carbon::now()->subYears(16)->toDateString(),
             "city_id"=>"required|numeric",
             "identity_no" => ["required", "numeric", "digits:10"], // Validation rule for exactly 8 digits
             'sector'=>"required|numeric",
@@ -148,10 +151,10 @@ class FinanceController extends Controller
         case 4:
             $request->validate([
               "bank_offer_id" => 'required|numeric',
-              'identity_Card' => 'file|mimes:jpeg,png,jpg|max:2048', 
-              'License_Card' => 'file|mimes:jpeg,png,jpg|max:2048', 
-              'Hr_Letter_Image' => 'file|mimes:jpeg,png,jpg|max:2048', 
-              'Insurance_Image' => 'file|mimes:jpeg,png,jpg|max:2048', 
+              'identity_Card' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+              'License_Card' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+              'Hr_Letter_Image' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+              'Insurance_Image' => 'file|mimes:jpeg,png,jpg,pdf|max:2048',
             ]);
             $request['car']=$car;
             $data = $this->calculateInstallmentscar($request);
@@ -451,6 +454,7 @@ public function financeOrder(Request $request){
           $request->validate([
             "brand" => "required|numeric",
             "model" => "required|numeric",
+            "category" => "required|numeric",
             "year" => "required|numeric",
             "gear_shifter"=>"required",
             "color_id"=>"required|numeric"
@@ -458,11 +462,11 @@ public function financeOrder(Request $request){
           break;
       case 3:
           $request->validate([
-          "client_name" => "required",
+          "client_name" =>['required' , 'string',new NotNumbersOnly],
           'email' => ['bail', 'required', 'email:rfc,dns', 'max:255'],
           'phone' => ['bail', 'required', 'regex:/^((\+|00)966|0)?5[0-9]{8}$/'],
           "sex" => "required",
-          "birth_date"=>"required",
+          'birth_date' => 'required|date|before_or_equal:' . Carbon::now()->subYears(16)->toDateString(),
           "city_id"=>"required|numeric",
           'identity_no' => 'required|nullable|unique:orders,identity_no|numeric|digits:10',
           'sector'=>"required|numeric",
@@ -483,9 +487,9 @@ public function financeOrder(Request $request){
                  Rule::unique('orders', 'phone'),
             ]
             ]);
-
         if($request->have_life_problem==true || $request->Monthly_cometment<600){
           $data= [];
+
         }else{
           
           $data=$this->calculateInstallmentscar($request);
@@ -496,10 +500,10 @@ public function financeOrder(Request $request){
       case 4:
           $request->validate([
             'bank_offer_id' => 'required|exists:bank_offers,id',
-            'identity_Card' => 'file|mimes:jpeg,png,jpg|max:2048', 
-            'License_Card' => 'file|mimes:jpeg,png,jpg|max:2048', 
-            'Hr_Letter_Image' => 'file|mimes:jpeg,png,jpg|max:2048', 
-            'Insurance_Image' => 'file|mimes:jpeg,png,jpg|max:2048', 
+            'identity_Card' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+            'License_Card' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+            'Hr_Letter_Image' => 'file|mimes:jpeg,png,jpg,pdf|max:2048', 
+            'Insurance_Image' => 'file|mimes:jpeg,png,jpg,pdf|max:2048',
           ]);
 
            $data = $this->calculateInstallmentscar($request);
@@ -620,11 +624,11 @@ public function financeOrder(Request $request){
         case 2:
        $carOrdersTableData = $request->validate([
           'cars' => ['bail','required', 'array'],
-          'organization_name' => ['bail','required', 'string', 'max:255'],
+          'organization_name' => ['bail','required', 'string', 'max:255',new NotNumbersOnly],
           'organization_type' => ['bail','required', 'numeric'],
           'commercial_registration_no' => ['required','nullable', 'numeric'],
           'organization_activity' => ['bail','required', 'numeric'],
-          'name' => ['bail','required', 'max:255'],
+          'name' => ['required' , 'string',new NotNumbersOnly],
           'phone' => ['bail', 'required','regex:/^((\+|00)966|0)?5[0-9]{8}$/'],
           'organization_age' => ['bail','required', 'min:1'],
           'city_id' => ['bail','required', 'nullable'],

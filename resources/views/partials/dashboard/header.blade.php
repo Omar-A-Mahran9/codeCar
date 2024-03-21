@@ -131,7 +131,7 @@
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
-                        <div class="menu-item px-5">
+                        {{-- <div class="menu-item px-5">
                             <div class="menu-content px-5">
                                 <label
                                     class="form-check form-switch form-check-custom form-check-solid pulse pulse-success"
@@ -142,7 +142,7 @@
                                     <span class="form-check-label text-gray-600 fs-7">{{ __('Notifications') }}</span>
                                 </label>
                             </div>
-                        </div>
+                        </div> --}}
                         <!--end::Menu item-->
                         <!--begin::Menu separator-->
                         <div class="separator my-2"></div>
@@ -167,7 +167,7 @@
                     <!--end::Menu wrapper-->
                 </div>
                 <!--end::User menu-->
-                <!--begin::Notifications-->
+                {{-- <!--begin::Notifications-->
                 <div class="d-flex align-items-center ms-3 ms-lg-4">
                     <!--begin::Drawer wrapper-->
                     <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline w-40px h-40px position-relative"
@@ -433,7 +433,7 @@
                         <!--end::Tab content-->
                     </div>
                 </div>
-                <!--end::Notifications-->
+                <!--end::Notifications--> --}}
                 <!--begin::Header menu toggle-->
                 <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
                     <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"

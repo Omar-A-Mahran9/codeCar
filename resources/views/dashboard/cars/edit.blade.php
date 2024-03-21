@@ -316,7 +316,7 @@
 
                                             <div class="form-floating">
                                                 <input type="text" class="form-control" id="video_url_inp"
-                                                    name="video_url" value="{{ $car['video_url'] }}"
+                                                    name="video_url" value="{{ $fullYoutubeUrl }}"
                                                     placeholder="example" />
                                                 <label for="video_url_inp">{{ __('Enter the video url') }}</label>
                                             </div>

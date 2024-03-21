@@ -255,7 +255,9 @@ class UserController extends Controller
                         'discount_price' => $request['Car_Price_after_Discount']=='null' ? null:$request['Car_Price_after_Discount'],
 
                     ];
-               
+                    if(isset($request['Car_Price_after_Discount']) && $request['Car_Price_after_Discount']>0){
+                        $data['have_discount']=1;
+                    }
 
                      $this->setCarName($data);
                      
@@ -330,7 +332,7 @@ class UserController extends Controller
                     $this->storeBrandCarsTypeCount($data['is_new'], $data['brand_id']);
 
                
-                    return response()->json(['error' => 'Your ad Added Successfully'], 200);
+                    return response()->json(['error' => 'Your ad Updated Successfully'], 200);
 
                 }
                 }
