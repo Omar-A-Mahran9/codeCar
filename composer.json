@@ -2,7 +2,10 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -15,15 +18,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5",
-        "webstdy/notification": "dev-master"
+        "laravel/tinker": "^2.5"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/hossamghoneim/webstdy-notification.git"
-        }
-    ],
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
@@ -39,7 +35,7 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         },
-        "files" : [
+        "files": [
             "app/Http/Helpers/dashboard_functions.php",
             "app/Http/Helpers/global_functions.php",
             "app/Http/Helpers/home_functions.php"

@@ -1,6 +1,5 @@
 <?php
 
-use Webstdy\Notification\NotificationServiceProvider;
 
 return [
 
@@ -84,7 +83,7 @@ return [
 
     'locale' => 'ar',
     'locales' => ['en', 'ar'],
-    'supported_languages' =>  ['en' => 'English', 'ar' => 'Arabic'],
+    'supported_languages' => ['en' => 'English', 'ar' => 'Arabic'],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -168,8 +167,8 @@ return [
         /*
          * Package Service Providers...
          */
-        
-            // ...
+
+        // ...
         Mccarlosen\LaravelMpdf\LaravelMpdfServiceProvider::class,
 
 
@@ -182,7 +181,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        NotificationServiceProvider::class
 
     ],
 

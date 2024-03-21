@@ -14,19 +14,19 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        // City::create([
-        //     'name_ar' => 'الرياض',
-        //     'name_en' => 'Al-Riyad',
-        // ]);
+        City::create([
+            'name_ar' => 'الرياض',
+            'name_en' => 'Al-Riyad',
+        ]);
 
-        // City::create([
-        //     'name_ar' => 'المدينة',
-        //     'name_en' => 'Al-Madinah',
-        // ]);
+        City::create([
+            'name_ar' => 'المدينة',
+            'name_en' => 'Al-Madinah',
+        ]);
 
-        // City::create([
-        //     'name_ar' => 'مكة',
-        //     'name_en' => 'Makkah',
-        // ]);
+        City::create([
+            'name_ar' => 'مكة',
+            'name_en' => 'Makkah',
+        ]);
     }
 }

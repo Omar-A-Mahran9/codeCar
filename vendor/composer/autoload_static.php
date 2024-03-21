@@ -59,7 +59,6 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'W' => 
         array (
             'Whoops\\' => 7,
-            'Webstdy\\Notification\\' => 21,
             'Webmozart\\Assert\\' => 17,
         ),
         'T' => 
@@ -228,10 +227,6 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'Whoops\\' => 
         array (
             0 => __DIR__ . '/..' . '/filp/whoops/src/Whoops',
-        ),
-        'Webstdy\\Notification\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/webstdy/notification/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -674,6 +669,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
         'App\\Http\\Controllers\\Api\\VendorController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/VendorController.php',
         'App\\Http\\Controllers\\Api\\citiyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/citiyController.php',
+        'App\\Http\\Controllers\\Api\\financecalc' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/financecalc.php',
         'App\\Http\\Controllers\\Auth\\EmployeeAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/EmployeeAuthController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Dashboard\\BankController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/BankController.php',
@@ -692,6 +688,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'App\\Http\\Controllers\\Dashboard\\EmployeeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/EmployeeController.php',
         'App\\Http\\Controllers\\Dashboard\\FaqController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/FaqController.php',
         'App\\Http\\Controllers\\Dashboard\\FeatureController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/FeatureController.php',
+        'App\\Http\\Controllers\\Dashboard\\FiananceController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/FiananceController.php',
         'App\\Http\\Controllers\\Dashboard\\FinanceApprovalsController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/FinanceApprovalsController.php',
         'App\\Http\\Controllers\\Dashboard\\FundingOrganizationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/FundingOrganizationController.php',
         'App\\Http\\Controllers\\Dashboard\\ModelController' => __DIR__ . '/../..' . '/app/Http/Controllers/Dashboard/ModelController.php',
@@ -840,6 +837,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'App\\Rules\\NotUrl' => __DIR__ . '/../..' . '/app/Rules/NotUrl.php',
         'App\\Rules\\PasswordValidate' => __DIR__ . '/../..' . '/app/Rules/PasswordValidate.php',
         'App\\Rules\\ValidateMaxImages' => __DIR__ . '/../..' . '/app/Rules/ValidateMaxImages.php',
+        'App\\Rules\\youtubevalidation' => __DIR__ . '/../..' . '/app/Rules/youtubevalidation.php',
         'App\\Services\\FcmService' => __DIR__ . '/../..' . '/app/Services/FcmService.php',
         'App\\Traits\\NotificationTrait' => __DIR__ . '/../..' . '/app/Traits/NotificationTrait.php',
         'App\\Traits\\RespondsWithHttpStatus' => __DIR__ . '/../..' . '/app/Traits/RespondsWithHttpStatus.php',
@@ -1113,6 +1111,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'DebugBar\\DataCollector\\MemoryCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/MemoryCollector.php',
         'DebugBar\\DataCollector\\MessagesAggregateInterface' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/MessagesAggregateInterface.php',
         'DebugBar\\DataCollector\\MessagesCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/MessagesCollector.php',
+        'DebugBar\\DataCollector\\ObjectCountCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/ObjectCountCollector.php',
         'DebugBar\\DataCollector\\PDO\\PDOCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/PDO/PDOCollector.php',
         'DebugBar\\DataCollector\\PDO\\TraceablePDO' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/PDO/TraceablePDO.php',
         'DebugBar\\DataCollector\\PDO\\TraceablePDOStatement' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataCollector/PDO/TraceablePDOStatement.php',
@@ -1124,6 +1123,8 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'DebugBar\\DataFormatter\\DataFormatter' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/DataFormatter.php',
         'DebugBar\\DataFormatter\\DataFormatterInterface' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/DataFormatterInterface.php',
         'DebugBar\\DataFormatter\\DebugBarVarDumper' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/DebugBarVarDumper.php',
+        'DebugBar\\DataFormatter\\HasDataFormatter' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/HasDataFormatter.php',
+        'DebugBar\\DataFormatter\\HasXdebugLinks' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/HasXdebugLinks.php',
         'DebugBar\\DataFormatter\\VarDumper\\DebugBarHtmlDumper' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DataFormatter/VarDumper/DebugBarHtmlDumper.php',
         'DebugBar\\DebugBar' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DebugBar.php',
         'DebugBar\\DebugBarException' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/DebugBarException.php',
@@ -5080,6 +5081,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'PharIo\\Manifest\\ManifestLoader' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestLoader.php',
         'PharIo\\Manifest\\ManifestLoaderException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestLoaderException.php',
         'PharIo\\Manifest\\ManifestSerializer' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestSerializer.php',
+        'PharIo\\Manifest\\NoEmailAddressException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/NoEmailAddressException.php',
         'PharIo\\Manifest\\PhpElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/PhpElement.php',
         'PharIo\\Manifest\\PhpExtensionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpExtensionRequirement.php',
         'PharIo\\Manifest\\PhpVersionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpVersionRequirement.php',
@@ -6014,6 +6016,7 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'Svg\\Tag\\Shape' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Shape.php',
         'Svg\\Tag\\Stop' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Stop.php',
         'Svg\\Tag\\StyleTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/StyleTag.php',
+        'Svg\\Tag\\Symbol' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php',
         'Svg\\Tag\\Text' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Text.php',
         'Svg\\Tag\\UseTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
@@ -6839,11 +6842,6 @@ class ComposerStaticInitc8a624e9866e4b49df806f199854d380
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
-        'Webstdy\\Notification\\Models\\Employee' => __DIR__ . '/..' . '/webstdy/notification/src/Models/Employee.php',
-        'Webstdy\\Notification\\NewNotification' => __DIR__ . '/..' . '/webstdy/notification/src/NewNotification.php',
-        'Webstdy\\Notification\\NotificationActions' => __DIR__ . '/..' . '/webstdy/notification/src/NotificationActions.php',
-        'Webstdy\\Notification\\NotificationController' => __DIR__ . '/..' . '/webstdy/notification/src/NotificationController.php',
-        'Webstdy\\Notification\\NotificationServiceProvider' => __DIR__ . '/..' . '/webstdy/notification/src/NotificationServiceProvider.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
         'Whoops\\Exception\\Frame' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Frame.php',
