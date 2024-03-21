@@ -111,9 +111,10 @@ trait Calculations{
         ->where('brand_id', request('brand'))
         ->where('year', request('year'))
         ->where('gear_shifter',request('gear_shifter'))
+        ->where('category_id',request('category'))
         ->first()??$request->car;
         $bank = Bank::find($request->bank);
- 
+
        if($car){
         $carDetails = CarResourse::make($car)->resolve();
         $brandId = $carDetails['brand']['id'];
@@ -124,9 +125,10 @@ trait Calculations{
         $sectorInstallment = null;
         $bankOffer=[];
         $bankOffers = $this->checkBankOffer($request->bank,$request->sector,$carDetails['brand']['id'],$request->first_batch,$request->installment);
-       
+
         foreach($bankOffers as $bankofferr){
             $bankdata=Bank::find($bankofferr->bank_id);
+
             if($bank->id==$bankofferr->bank_id){
              array_push($bankOffer,$bankofferr);
             }
@@ -137,6 +139,7 @@ trait Calculations{
               
             }
             }
+
         // else{
         //  $bankOffer = $this->checkBankOffersec($request->bank,$request->sector,$carDetails['brand']['id'],$request->first_batch,$request->installment);
         //  }
@@ -150,7 +153,7 @@ trait Calculations{
             $sectorAdministrative_fees = $offer->administrative_fees/100;
             $sectorInstallment = $offer->installment ; //year
             $price =  $car->getPriceAfterVatAttribute();
-            
+
             if($offer->support >= 100){
                 $price = 0;
             }else{

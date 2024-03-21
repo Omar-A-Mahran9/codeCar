@@ -17,8 +17,8 @@ function alertUploadFileHtml(){
                         . __('and then convert it to webp image and we advice you to use') .    
                         " <a href=\"https://cloudconvert.com/png-to-webp/\" target=\"_blank\">cloudconvert</a>
                         </li>
-                        <li>
-                            ".__('In the case of attaching a video, please compress the size of the videos and we will recommend a program for you')." <a href=\"https://handbrake.fr/\" target=\"_blank\">handbrake</a>
+                        <li class=\"fw-bold\" style=\"font-weight:bold !important\">
+                            ".__("We will recommend a image ratio to be width : 604px , height : 408px")."
                         </li>
                     </ul>
                 </div>

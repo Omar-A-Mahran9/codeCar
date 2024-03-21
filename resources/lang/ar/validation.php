@@ -322,6 +322,7 @@ return [
         'meta_tag_keyword_ar' => 'كلمات دلالية بالعربية',
         'meta_tag_keyword_en' => 'كلمات دلالية بالانجليزية',
         'privacy_policy_ar' => 'سياسة الخصوصية بالعربية',
+        'birth_date'=>'تاريخ الميلاد',
         'privacy_policy_en' => 'سياسة الخصوصية بالانجليزية',
         'about_us_ar' => 'عن موقعك بالعربية',
         'about_us_en' => 'عن موقعك بالانجليزية',

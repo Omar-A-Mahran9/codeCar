@@ -62,13 +62,16 @@ class CarController extends Controller
         $colors = Color::select('id','image','name_' . getLocale(),'hex_code')->get();
         $relatedImages = $car->images;
         $tags   = Tag::select('id','name_' . getLocale() )->get();
- 
+        $carvideoId = $car->video_url;
+        $this->getYoutubeVideoUrl($carvideoId);
+        $fullYoutubeUrl = ($carvideoId) ? $this->getYoutubeVideoUrl($carvideoId) : null;
+
         $selectedtagsIds = $car->tags->pluck('id')->toArray();
          
  
 
 
-         return view('dashboard.cars.edit',compact('brands','colors','car','models','cities','categories','relatedImages','tags','selectedtagsIds'));
+         return view('dashboard.cars.edit',compact('brands','colors','car','models','cities','categories','relatedImages','tags','selectedtagsIds','fullYoutubeUrl'));
     }
 
     public function validateStep( Request $request , Car $car = null)
@@ -179,7 +182,8 @@ class CarController extends Controller
             // $data['images'] =  uploadImage( $request->file('images') , "Cars");
          }
 
-            
+         $data['video_url']=$this->getYoutubeVideoId($request['video_url']);
+
         //   $this->setCarName($data);
          $car = Car::create($data);
  
@@ -284,7 +288,8 @@ class CarController extends Controller
             ]);
           }
          
-        
+          $data['video_url']=$this->getYoutubeVideoId($request['video_url']);
+
         // $this->setCarName($data);
 
         $carOldType = $car['is_new'];
@@ -610,5 +615,32 @@ public function show(Car $car){
         }
     }
 
+    function getYoutubeVideoId($url)
+    {
+        // Use a regular expression to extract the video ID from the YouTube URL
+        $pattern = '/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
+        
+        // Check if the URL matches the pattern
+        if (preg_match($pattern, $url, $matches)) {
+            // Return the extracted video ID
+            return $matches[1];
+        }
+    
+        // Return null if no match is found
+        return null;
+    }
+    protected function getYoutubeVideoUrl($videoId)
+    {
+    // Use a regular expression to extract the video ID from the YouTube URL
+    $pattern = '/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/';
+     // Check if the URL matches the pattern
+   
+        // Return the full YouTube URL
+        return 'https://www.youtube.com/watch?v=' .$videoId;
+    
+
+    // Return null if no match is found
+
+    }
 
 }

@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('opened_by')->references('id')->on('employees')->onUpdate('cascade')->onDelete('cascade');
             $table->string('name');
             $table->string('phone');
+            $table->date('birth_date')->nullable();
             $table->string('identity_no')->nullable();
 
             $table->enum('sex', ['male','female', 'other'])->default('other');

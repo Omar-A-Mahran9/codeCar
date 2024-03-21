@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Home' , 'middleware' => 'set_locale', 'as' => 'hom
     Route::post('/individuals-finance','OrderController@individualsFinance')->name('individualsFinance');
 });
 
+
 // Route::get('update-db', function () {
 
 //     Artisan::call('migrate:fresh');

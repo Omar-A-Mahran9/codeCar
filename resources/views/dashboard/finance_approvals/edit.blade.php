@@ -222,11 +222,11 @@
 
 
                                     <!-- end   :
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        : Column -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        : Column -->
                                     <div class="col-md-4 fv-row">
 
                                         <label class="fs-5 fw-bold mb-2">{{ __('Tax discount') }}
-                                            {{ settings()->getSettings('tax') }}
+                                            {{ settings()->getSettings('maintenance_mode') == 1 ? settings()->getSettings('tax') : 0 }}
                                             %</label>
                                         <div class="form-floating">
                                             <input type="number" class="form-control form-control-solid"
@@ -496,7 +496,8 @@
 
                     <!-- begin :: Form footer -->
                     <div class="form-footer">
-                        <input type="number" id="tax" hidden value="{{ settings()->getSettings('tax') }}">
+                        <input type="number" id="tax" hidden
+                            value="{{ settings()->getSettings('maintenance_mode') == 1 ? settings()->getSettings('tax') : 0 }}">
                         <input type="number" id="maleInsurance" hidden
                             value="{{ settings()->getSettings('males_insurance') }}">
                         <input type="number" id="femaleInsurance" hidden

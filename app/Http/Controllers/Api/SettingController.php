@@ -7,6 +7,7 @@ use App\Models\News;
 use App\Models\Offer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use Artisan;
 
 class SettingController extends Controller
@@ -18,7 +19,7 @@ class SettingController extends Controller
             $data = [
                 'logo' => getImagePathFromDirectory(settings()->getSettings('logo'), 'Settings'),
                 'description' => settings()->getSettings('footer_text_' . getLocale()),
-                'whatsapp' => settings()->getSettings('whatsapp'),
+                'whatsapp_phone' => settings()->getSettings('whatsapp'),
                 'facebook' => settings()->getSettings('facebook_url'),
                 'twitter' => settings()->getSettings('twitter_url'),
                 'instagram' => settings()->getSettings('instagram_url'),
@@ -26,6 +27,8 @@ class SettingController extends Controller
                 'snapchat' => settings()->getSettings('snapchat_url'),
                 'tiktok' => settings()->getSettings('tiktok'),
                 'whatsapp' => settings()->getSettings('whatsapp_url'),
+                'working_time' => settings()->getSettings('working_time'),
+
             ];
             return $this->success(data: $data);
         } catch (\Exception $e)
@@ -166,6 +169,29 @@ class SettingController extends Controller
         {
             return $this->failure(message: $e->getMessage());
         }
+    }
+    public function filter_count(){
+        $car=Car::get();
+ 
+        // Assuming 'status' is the attribute that indicates whether a car is new or used
+        $usedCount = $car->where('is_new', '0')->count();
+        $newCount = $car->where('is_new', '1')->count();
+        $automatic_gear = $car->where('gear_shifter', 'automatic')->count();
+        $manual_gear = $car->where('gear_shifter', 'manual')->count();
+
+        
+        $data = [
+            'used' => $usedCount,
+            'new' => $newCount,
+            'automatic'=>$automatic_gear,
+            'automatic'=>$manual_gear,
+
+            
+        ];
+        return $this->success(data: $data);
+
+     
+
     }
 
     public function offer()

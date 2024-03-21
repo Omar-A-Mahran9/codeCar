@@ -139,10 +139,8 @@
                     <div class="col-md-4 fv-row">
                         <label class="fs-5 fw-bold mb-2">{{ __('Phone') }}</label>
                         <div class="input-group mb-5">
-                            <span class="input-group-text" id="basic-addon1">+966</span>
-                            <input type="text" class="form-control"
-                                value="{{ __(str_replace('966', ' ', settings()->getSettings('phone'))) }}" id="phone_inp"
-                                name="phone" placeholder="{{ __('Enter the phone') }}" />
+                            <input type="text" class="form-control" value="{{ settings()->getSettings('phone') }}"
+                                id="phone_inp" name="phone" placeholder="{{ __('Enter the phone') }}" />
                             <p class="invalid-feedback" id="phone"></p>
                         </div>
                     </div>
@@ -326,7 +324,7 @@
 
                         <div class="d-flex justify-content-between align-items-center mt-12">
 
-                            <label class="form-label">{{ __('Maintenance mode') }}</label>
+                            <label class="form-label">{{ __('Tax active') }}</label>
 
                             <div class="form-check form-check-custom form-check-solid my-auto">
                                 <input class="form-check-input" type="radio" value="1" name="maintenance_mode"
@@ -350,7 +348,7 @@
 
                 </div>
                 <!-- End   :: Input group -->
-                <div class="fv-row row mb-15 mt-5">
+                <div class="fv-row row mt-5">
 
                     <!-- Begin :: Col -->
                     <div class="col-md-6">
@@ -378,6 +376,18 @@
                     </div>
                     <!-- End   :: Col -->
 
+                </div>
+                <div class="fv-row row mb-15 mt-10">
+
+                    <div class="col-md-12">
+
+                        <label class="form-label">{{ __('working time') }}</label>
+                        <input type="text" class="form-control" name="working_time"
+                            value="{{ settings()->getSettings('working_time') ?? '' }}" id="working_time_inp"
+                            placeholder="{{ __('Enter the working time url') }}">
+                        <p class="invalid-feedback" id="working_time"></p>
+
+                    </div>
                 </div>
                 <h2 class="text-decoration-underline fw-bolder">{{ __('Insurance Percentage') }}</h2>
 
@@ -1784,7 +1794,7 @@
                 <!--</div>-->
                 <!-- End   :: Input group --
 
-                                                                                                                                                                                                                                                         Begin   :: Input group -->
+                                                                                                                                                                                                                                                                                     Begin   :: Input group -->
                 <div class="fv-row row mb-15">
 
                     <!-- Begin :: Col -->

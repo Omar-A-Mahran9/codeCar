@@ -42,7 +42,8 @@ class StorePackageRequest extends FormRequest
                 'nullable',
                 'numeric',
                 'not_in:0',
-                'gt:annual_price_after_discount',
+                'lt:annual_price_after_discount',
+                'lt:monthly_price',
 
              ],
          
@@ -50,7 +51,9 @@ class StorePackageRequest extends FormRequest
                 'required_if:discount_flag,1',
                 'nullable',
                 'numeric',
-                'lt:monthly_price_after_discount',
+                'gt:monthly_price_after_discount',
+                'lt:annual_price',
+
              ],
             'discount_from_date' => [
                 'required_if:discount_flag,1',

@@ -151,6 +151,7 @@
                         <h2 style="font-weight:bold; ">{{ __('Customer Details') }}</h2>
 
                     </div>
+
                     @if ($order['orderDetailsCar']['type'] == 'individual')
                         <div class="ps-4">
                             <a href="https://wa.me/{{ $order['phone'] }}?text={{ urlencode(__('السلام عليكم. موقع كود كار للسيارات يرحب بكم ويسعدنا التواصل معك بخصوص طلبك رقم ' . $order['id'] . ' لسيارة: ' . $order['car_name'] . '')) }}"
@@ -161,10 +162,34 @@
                             </a>
                         </div>
                     @else
-                        @foreach (json_decode($order['orderDetailsCar']['cars'], true) as $car)
-                            @if (isset($car))
-                            @endif <!--end::Cars-->
-                        @endforeach
+                        @if ($order['orderDetailsCar']['cars'])
+                            @php
+                                $carCount = 0;
+                            @endphp
+                            @foreach (json_decode($order['orderDetailsCar']['cars'], true) as $car)
+                                @if (isset($car))
+                                    {{-- Here you can put any code related to displaying individual cars --}}
+                                    @php
+                                        $carCount += $car['count'];
+                                    @endphp
+                                @endif <!--end::Cars-->
+                            @endforeach
+                            <div class="ps-4">
+                                <a href="https://wa.me/{{ $order['phone'] }}?text={{ urlencode(__('السلام عليكم. موقع كود كار للسيارات يرحب بكم ويسعدنا التواصل معك بخصوص طلبك رقم ' . $order['id'] . ' ' . ' العدد الطلوب' . ' ' . $carCount . ' ' . 'سيارة')) }}"
+                                    target="_blank" title="Chat on WhatsApp" class="whatsapp-icon">
+                                    <img src="{{ asset('dashboard-assets/media/svg/social-logos/whatsapp.svg') }}"
+                                        alt="WhatsApp Logo"
+                                        style="width:50px; height: 50px; margin-left: 23px; margin-right: 23px;">
+                                </a>
+                            </div>
+                        @else
+                            <a href="https://wa.me/{{ $order['phone'] }}?text={{ urlencode(__('السلام عليكم. موقع كود كار للسيارات يرحب بكم ويسعدنا التواصل معك بخصوص طلبك رقم ' . $order['id'] . ' لسيارة: ' . ' ' . $order['car_name'] . ' ' . 'عدد' . ' ' . $order['orderDetailsCar']['car_count'])) }}"
+                                target="_blank" title="Chat on WhatsApp" class="whatsapp-icon">
+                                <img src="{{ asset('dashboard-assets/media/svg/social-logos/whatsapp.svg') }}"
+                                    alt="WhatsApp Logo"
+                                    style="width:50px; height: 50px; margin-left: 23px; margin-right: 23px;">
+                            </a>
+                        @endif
                     @endif
 
 
@@ -218,6 +243,21 @@
                                     </td>
                                     <td class="fw-bolder text-end">{{ $order['phone'] }}</td>
                                 </tr>
+                                @if ($order['birth_date'])
+                                    <tr>
+                                        <td class="text-muted">
+                                            <div class="d-flex align-items-center">
+                                                <span>
+                                                    <i class="fa fa-calendar mx-2"></i>
+                                                </span>
+
+
+                                                {{ __('Birth date') }}
+                                            </div>
+                                        </td>
+                                        <td class="fw-bolder text-end">{{ $order['birth_date'] }}</td>
+                                    </tr>
+                                @endif
                                 <!--end::Date-->
                             </tbody>
                             <!--end::Table body-->
@@ -677,6 +717,49 @@
         </div>
         <!--end::Tab content-->
     </div>
+    <!-- Assuming you are using Bootstrap that comes with Metronic -->
+    @if ($order['identity_Card'] || $order['License_Card'] || $order['Hr_Letter_Image'] || $order['Insurance_Image'])
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div style="text-align: center; margin-bottom:30px">
+                        <h5 class="card-title">{{ __('Download Documents') }}</h5>
+                        <p class="card-text">{{ __('Click on the buttons below to download your documents') }}.</p>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        @if ($order['identity_Card'])
+                            <a href="{{ route('dashboard.files.download', $order['identity_Card']) }}"
+                                class="btn btn-success me-md-2" target="_blank">
+                                <i class="bi bi-file-earmark-arrow-down"></i> {{ __('Download Identity Card') }}
+                            </a>
+                        @endif
+                        @if ($order['License_Card'])
+                            <a href="{{ route('dashboard.files.download', $order['License_Card']) }}"
+                                class="btn btn-info me-md-2" target="_blank">
+                                <i class="bi bi-file-earmark-arrow-down"></i>{{ __('Download Identity License Card') }}
+                            </a>
+                        @endif
+                        @if ($order['Hr_Letter_Image'])
+                            <a href="{{ route('dashboard.files.download', $order['Hr_Letter_Image']) }}"
+                                class="btn btn-warning me-md-2" target="_blank">
+                                <i class="bi bi-file-earmark-arrow-down"></i>{{ __('Download License Hr Letter Image') }}
+                            </a>
+                        @endif
+                        @if ($order['Insurance_Image'])
+                            <a href="{{ route('dashboard.files.download', $order['Insurance_Image']) }}"
+                                class="btn btn-primary me-md-2" target="_blank">
+                                <i class="bi bi-file-earmark-arrow-down"></i> {{ __('Download Insurance Image') }}
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    @endif
+
+
     <!--end::Order details page-->
 @endsection
 @push('styles')

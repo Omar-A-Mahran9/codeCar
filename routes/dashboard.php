@@ -93,4 +93,26 @@ Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'as' => 'dash
     Route::get('trash/{modelName}/{id}', 'TrashController@restore');
     Route::delete('trash/{modelName}/{id}', 'TrashController@forceDelete');
 
+    Route::get('/Images/{type}', function ($type) {
+        $fileUrl = getImagePathFromDirectory($type, 'Orders');
+    
+        if (!$fileUrl) {
+            abort(404, 'File not found.');
+        }
+    
+        $fileName = basename($fileUrl);
+    
+        // Fetch file content from URL
+        $fileContent = file_get_contents($fileUrl);
+        if ($fileContent === false) {
+            abort(404, 'Failed to download file.');
+        }
+    
+        // Serve file with appropriate headers to force download
+        return response($fileContent, 200, [
+            'Content-Type' => 'application/octet-stream',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ]);
+    })->name('files.download')->middleware('auth');
+    
 });

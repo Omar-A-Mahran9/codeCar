@@ -28,8 +28,12 @@ class SettingSeeder extends Seeder
                 'option_value' => 'https://youtu.be/jqk9nZBDb8Y'
             ],
             [
-                'option_name' => 'facebook_url',
+                'option_name' => 'working_time',
                 'option_value' => 'https://www.facebook.com/'
+            ],
+            [
+                'option_name' => 'working_time',
+                'option_value' => 'من الأحد الى الخميس من الساعة ٨ صباحا حتى ١٠ مساءا'
             ],
             [
                 'option_name' => 'whatsapp_url',
