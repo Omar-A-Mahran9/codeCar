@@ -1794,7 +1794,7 @@
                 <!--</div>-->
                 <!-- End   :: Input group --
 
-                                                                                                                                                                                                                                                                                     Begin   :: Input group -->
+                                                                                                                                                                                                                                                                                         Begin   :: Input group -->
                 <div class="fv-row row mb-15">
 
                     <!-- Begin :: Col -->

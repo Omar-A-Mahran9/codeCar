@@ -206,8 +206,7 @@
                                     <!-- begin :: Row -->
                                     <div class="row mb-10">
                                         <div class="col-md-3 fv-row">
-                                            {{ $car['category_id'] }}
-                                            <label class="fs-5 fw-bold mb-2">{{ __('Category') }}</label>
+                                             <label class="fs-5 fw-bold mb-2">{{ __('Category') }}</label>
                                             <select class="form-select" data-control="select2" name="category_id"
                                                 id="category-sp" data-placeholder="{{ __('Choose the category') }}"
                                                 data-dir="{{ isArabic() ? 'rtl' : 'ltr' }}">

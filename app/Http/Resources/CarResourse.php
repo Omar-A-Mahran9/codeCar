@@ -24,10 +24,9 @@ class CarResourse extends JsonResource
         $order = Order::where('car_id', $this->id)->get();
        
 
-        $financeOrdersCountPerCar = $order->where('orderDetailsCar', function ($query) {
-             $query->where('payment_type', 'finance');
-        })->count();
-
+        $financeOrdersCountPerCar = Order::where('car_id', $this->id)->whereHas('orderDetailsCar', function ($query) {
+            $query->where('payment_type', 'finance');
+        })->with('orderDetailsCar')->count();
         $orderCount=$order->count();
 
         $fav = Favorite::where('car_id', $this->id)

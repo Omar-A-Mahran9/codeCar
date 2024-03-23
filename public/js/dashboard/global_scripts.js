@@ -244,7 +244,7 @@ let initTinyMc = function (editingInp = false) {
     menubar: false,
     toolbar: [
       "styleselect save",
-      "undo redo | cut copy paste | bold italic | link | alignleft aligncenter alignright alignjustify|bullist numlist  ",
+      "undo redo | cut copy paste | bold italic | link | alignleft aligncenter alignright alignjustify | bullist numlist  ",
       "outdent indent | blockquote subscript superscript ",
       "advlist autolink lists charmap ", // Add this line to include the text direction tool
     ],

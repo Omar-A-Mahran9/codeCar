@@ -129,6 +129,9 @@ class AdsController extends Controller
                 ];
 
                 $this->setCarName($data);
+                if(isset($request['Car_Price_after_Discount']) && $request['Car_Price_after_Discount']>0){
+                    $data['have_discount']=1;
+                }
                 $car = Car::create($data);
                 $this->storeBrandCarsTypeCount($data['is_new'], $data['brand_id']);
 
